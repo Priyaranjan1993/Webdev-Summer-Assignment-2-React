@@ -44,7 +44,7 @@
     background-color: #eee;
     position: fixed;
     top: 0px;
-    padding: 0 150px;
+    padding: 0 5%;
     height: 44px;
 }
 
@@ -83,6 +83,7 @@
     font-weight: 500;
     text-align: right;
 }
+
 @media screen and (max-width: 768px) {
     .d-last-modified-Width {
         margin: 0px 0 0 0px;
@@ -91,4 +92,55 @@
     .t-last-modified-Width {
         margin: 0px 0 0 0px;
     }
+}
+
+.content {
+    margin: 126px 0 0 0;
+}
+
+body {
+    background-color: #eee;
+}
+
+.row-div {
+    background-color: #fff;
+    color: #444;
+    display: flex;
+    height: 46px;
+    width: 100%;
+}
+
+.div-parent {
+    margin: 0 70px;
+    border-bottom: 1px solid #c4c4c4;
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+    border-top: 1px solid #d3d3d3;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.07);
+}
+table{
+    width: 100%;
+}
+
+.title-row{
+    border-bottom: 1px solid #e3e3e3;
+    width: 30%;
+}
+
+.owner-row{
+    border-bottom: 1px solid #e3e3e3;
+    width: 30%;
+}
+
+.date-row{
+    border-bottom: 1px solid #e3e3e3;
+    width: 20%;
+}
+
+.time-row{
+    border-bottom: 1px solid #e3e3e3;
+    width: 20%;
+}
+.table-data-width{
+    width: 100%;
 }

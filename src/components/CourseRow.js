@@ -11,14 +11,36 @@ class CourseRow extends React.Component {
 
     render() {
         return (
-            <tr>
-               {/* <td>{this.props.course.title}</td>*/}
-                <td>
-                    <Link to= {`/course/${this.props.course.id}/edit`}>
+           <tr>
+               <td className="title-row">
+                <div className="row-div float-left">
+                    <Link to={`/course/${this.props.course.id}/edit`} className="table-data-width">
                         {this.props.course.title}
                     </Link>
-                </td>
-            </tr>
+                </div>
+               </td>
+               <td className="owner-row">
+                <div className="row-div float-left">
+                    <Link to={`/course/${this.props.course.id}/edit`} className="table-data-width">
+                        {this.props.course.title}
+                    </Link>
+                </div>
+               </td>
+               <td className="date-row">
+                <div className="row-div float-left">
+                    <Link to={`/course/${this.props.course.id}/edit`} className="table-data-width">
+                        {this.props.course.title}
+                    </Link>
+                </div>
+               </td>
+               <td className="time-row">
+                <div className="row-div float-left">
+                    <Link to={`/course/${this.props.course.id}/edit`} className="table-data-width">
+                        {this.props.course.title}
+                    </Link>
+                </div>
+               </td>
+           </tr>
         )
     }
 }
