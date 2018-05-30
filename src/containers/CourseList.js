@@ -1,5 +1,5 @@
 import React from 'react';
-import CourseRow from './CourseRow'
+import CourseRow from '../components/CourseRow'
 import CourseService from '../services/CourseService';
 
 class CourseList extends React.Component {
@@ -13,6 +13,7 @@ class CourseList extends React.Component {
     }
 
     componentDidMount() {
+        console.log("message2");
         this.findAllCourses();
     }
 
@@ -37,22 +38,25 @@ class CourseList extends React.Component {
             .deleteCourse(courseId);
     }
 
-    courseRows() {
-        var rows = this.state.courses.map((course) => {
-            return <CourseRow course={course} key={course.id}
-                              delete={this.deleteCourse}/>
-        });
-    }
 
+    renderCourseRows() {
+        let courses = null;
 
-    courseRows() {
-        var rows = this.state.courses.map(function (course) {
-            return <CourseRow course={course}/>
-        });
+        //console.log("render course rows");
+        //console.log(this.state);
+        if(this.state) {
+            courses = this.state.courses.map(
+                function (course) {
+                    return <CourseRow key={course.id}
+                                      course={course}/>
+                }
+            )
+        }
         return (
-            rows
+            courses
         )
     }
+
 
     titleChanged(event) {
         this.setState({
@@ -84,7 +88,7 @@ class CourseList extends React.Component {
                     </tr>
                     </thead>
                     <tbody>
-                    {this.courseRows()}
+                    {this.renderCourseRows()}
                     </tbody>
                 </table>
             </div>

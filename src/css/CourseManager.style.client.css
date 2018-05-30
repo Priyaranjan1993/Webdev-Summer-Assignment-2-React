@@ -1,0 +1,94 @@
+.root {
+    flex-grow: 1;
+}
+
+.flex {
+    flex: 1 !important;
+}
+
+.menuButton {
+    margin-left: -12px !important;
+    margin-right: 20px !important;
+}
+
+.customBox {
+    margin: 0 0 0 9%;
+    width: 52%;
+}
+
+#panelStyle {
+    background-color: #5087ed !important;
+    position: fixed;
+    top: 0;
+}
+
+.panelTextbox {
+    background-color: #6c9aef;
+    border: 1px solid #6c9aef;
+    color: #fff;
+}
+
+.form-control::-webkit-input-placeholder {
+    color: white;
+}
+
+.form-control:focus {
+    color: white;
+    background-color: #6c9aef;
+}
+
+.table-Header {
+    margin: 64px 0 0 0;
+    width: 100%;
+    box-shadow: 1px 2px 1px #d3d3d3;
+    background-color: #eee;
+    position: fixed;
+    top: 0px;
+    padding: 0 150px;
+    height: 44px;
+}
+
+.title-Width {
+    width: 30%;
+    margin: 13px 0 0 0px;
+    font-size: 14px;
+    color: #555555;
+    font-weight: 500;
+    text-align: left;
+}
+
+.owner-Width {
+    width: 30%;
+    margin: 13px 0 0 0px;
+    font-size: 14px;
+    color: #555555;
+    font-weight: 500;
+    text-align: center;
+}
+
+.d-last-modified-Width {
+    width: 20%;
+    margin: 13px 0 0 0px;
+    font-size: 14px;
+    color: #555555;
+    font-weight: 500;
+    text-align: center;
+}
+
+.t-last-modified-Width {
+    width: 20%;
+    margin: 13px 0 0 0px;
+    font-size: 14px;
+    color: #555555;
+    font-weight: 500;
+    text-align: right;
+}
+@media screen and (max-width: 768px) {
+    .d-last-modified-Width {
+        margin: 0px 0 0 0px;
+    }
+
+    .t-last-modified-Width {
+        margin: 0px 0 0 0px;
+    }
+}
