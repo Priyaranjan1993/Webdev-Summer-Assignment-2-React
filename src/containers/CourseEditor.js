@@ -1,6 +1,8 @@
 import React from 'react';
 import ModuleList from './modules/ModuleList'
 import {Link} from 'react-router-dom'
+import $ from 'jquery'
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 
 import '../css/CourseManager.style.client.css'
 import '../css/ModuleEditor.style.client.css'
@@ -17,11 +19,49 @@ import Clear from '@material-ui/icons/Clear'
 import CourseService from "../services/CourseService";
 
 
+const SortableItem = SortableElement(({value}) =>
+    <li>{value}</li>
+);
+
+const SortableList = SortableContainer(({items}) => {
+    return (
+        <ul>
+            {items.map((value, index) => (
+                <SortableItem key={`item-${index}`} index={index} value={value}/>
+            ))}
+        </ul>
+    );
+});
+
+class SortableComponent extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6']
+        }
+    }
+
+    onSortEnd = ({oldIndex, newIndex}) => {
+        this.setState({
+            items: arrayMove(this.state.items, oldIndex, newIndex),
+        });
+    };
+
+    render() {
+        return <SortableList items={this.state.items} onSortEnd={this.onSortEnd}/>;
+    }
+}
+
+
 class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
         this.courseService = CourseService.instance;
-        this.state = {courseId: '',courseTitle:''};
+        this.state = {
+            courseId: '',
+            courseTitle: ''
+        };
         this.selectCourse = this.selectCourse.bind(this);
         this.setTitle = this.setTitle.bind(this);
     }
@@ -29,6 +69,12 @@ class CourseEditor extends React.Component {
     componentDidMount() {
         this.selectCourse(this.props.match.params.courseId);
         this.setTitle(this.props.match.params.courseId);
+        $(function(){
+            $('.module-menu, .module-content').css({ height: $(window).innerHeight() });
+            $(window).resize(function(){
+                $('.module-menu, .module-content').css({ height: $(window).innerHeight() });
+            });
+        });
     }
 
     componentWillReceiveProps(newProps) {
@@ -49,15 +95,10 @@ class CourseEditor extends React.Component {
             });
     }
 
-    /*setCourseId(courseId) {
-        this.setState({courseId: courseId});
-    }*/
-
-
     render() {
         return (
             <div>
-                <div className="root">
+                <div className="root module-header">
                     <AppBar position="static" id="panelStyle">
                         <Toolbar>
                             <IconButton className="menuButton" color="inherit" aria-label="Menu">
@@ -71,8 +112,13 @@ class CourseEditor extends React.Component {
                         </Toolbar>
                     </AppBar>
                 </div>
-                <div className="col-4">
+                <div className="row">
+                <div className="col-2 module-menu">
+                    <SortableComponent/>
+                </div>
+                <div className="col-10 module-content">
                     <ModuleList courseId={this.state.courseId}/>
+                </div>
                 </div>
             </div>
         )
