@@ -2,19 +2,7 @@ import React from 'react'
 import ModuleService from '../../services/ModuleService'
 import ModuleListItem from '../../components/ModuleListItem'
 import ModuleEditor from './ModuleEditor'
-import '../../../node_modules/bootstrap/dist/css/bootstrap.css'
 import {BrowserRouter as Router,Route} from 'react-router-dom'
-
-import '../css/CourseManager.style.client.css'
-import $ from 'jquery'
-import '../../node_modules/font-awesome/css/font-awesome.min.css';
-
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 
 
 export default class ModuleList extends React.Component {
@@ -26,7 +14,7 @@ export default class ModuleList extends React.Component {
         this.setModuleTitle = this.setModuleTitle.bind(this);
         this.createModule = this.createModule.bind(this);
         this.deleteModule = this.deleteModule.bind(this);
-        this.renderModules = this.renderModules.bind(this)
+        this.renderModules = this.renderModules.bind(this);
         this.moduleService = ModuleService.instance;
     }
 
