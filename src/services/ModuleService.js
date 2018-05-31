@@ -1,6 +1,7 @@
 let _singleton = Symbol();
 const MODULE_API_URL = 'http://localhost:8080/api/course/COURSE_ID/module';
 const MODULEID_API_URL = 'http://localhost:8080/api/module/MODULE_ID';
+const MODUL_API_URL = 'http://localhost:8080/api/module';
 
 export default class ModuleService {
     constructor(singletonToken) {
@@ -36,10 +37,12 @@ export default class ModuleService {
     }
 
     deleteModule(moduleId) {
-        return fetch(MODULE_API_URL.replace
-        ('MODULE_ID', moduleId), {
-            method: 'delete'
-        })
+        return fetch(MODUL_API_URL+ '/' + moduleId,
+            {
+                method: 'DELETE'
+            }).then(function (response) {
+                return response;
+            })
     }
 }
 

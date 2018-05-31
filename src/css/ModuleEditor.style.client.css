@@ -1,12 +1,70 @@
-.back-to-home-link{
-    color:white !important;
+.back-to-home-link {
+    color: white !important;
 }
 
-.module-header{
+.module-header {
     margin: 0 0 -62px 0;
 }
 
-.module-menu{
+.module-menu {
     background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.28) 0px 0px 16px;
+    background-color: #3366CC;
+    color: white;
 }
+
+.sidenav {
+    height: 100%;
+    width: 242px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #3366CC;
+    overflow-x: hidden;
+    padding-top: 104px;
+}
+
+.sidenav a {
+    padding: 12px 8px 12px 66px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    text-transform: uppercase;
+}
+
+.sidenav a:hover {
+    background-color: #3399FF
+}
+
+.sidenav a:active{
+    color: #fff;
+}
+
+.clickedStyles{
+    visibility:visible!important;
+    opacity: 1 !important;
+}
+
+/*
+.left-menu-design {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+.left-menu-design a,.left-menu-design a:hover,.left-menu-design a:focus{
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.left-menu-design:hover{
+    background-color: #3399FF !important;
+}
+
+
+.left-menu-design ul li.active > a {
+    color: #fff;
+    background: #6d7fcc;
+}*/

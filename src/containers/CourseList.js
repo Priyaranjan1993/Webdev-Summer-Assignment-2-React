@@ -104,24 +104,6 @@ class CourseList extends React.Component {
                     <div className="float-left t-last-modified-Width">Action</div>
                 </div>
                 <div className="div-parent">
-                    {/*                <h2>Course List</h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                    </tr>
-                    <tr>
-                        <th><input id="titleFld"
-                                   placeholder="cs101" onChange={this.titleChanged}/></th>
-                        <th>
-                            <button onClick={this.createCourse}>Add</button>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderCourseRows()}
-                    </tbody>
-                </table>*/}
                     <table>
                         <tbody>
                         {this.renderCourseRows()}
