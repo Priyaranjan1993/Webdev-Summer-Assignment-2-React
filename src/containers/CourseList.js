@@ -3,6 +3,7 @@ import CourseRow from '../components/CourseRow'
 import CourseService from '../services/CourseService';
 import '../css/CourseManager.style.client.css'
 import $ from 'jquery'
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -45,20 +46,19 @@ class CourseList extends React.Component {
 
     deleteCourse(courseId) {
         this.courseService
-            .deleteCourse(courseId);
+            .deleteCourse(courseId)
+            .then(() => {
+                this.findAllCourses();
+            });
     }
 
 
     renderCourseRows() {
         let courses = null;
-
-        //console.log("render course rows");
-        //console.log(this.state);
         if (this.state) {
             courses = this.state.courses.map(
-                function (course) {
-                    return <CourseRow key={course.id}
-                                      course={course}/>
+                (course) => {
+                    return <CourseRow key={course.id} course={course} delete={this.deleteCourse}/>
                 }
             )
         }
@@ -72,11 +72,6 @@ class CourseList extends React.Component {
         this.setState({
             course: {title: event.target.value}
         });
-    }
-
-    createCourse() {
-        console.log(this.state.course);
-
     }
 
 
@@ -93,9 +88,12 @@ class CourseList extends React.Component {
                                 Course Manager
                             </Typography>
                             <div className="form-group customBox">
-                                <input type="text" className="form-control panelTextbox" id="usr"
-                                       placeholder="New Course Title"/>
+                                <input type="text" className="form-control panel-textbox" id="usr"
+                                       placeholder="New Course Title" onChange={this.titleChanged}/>
                             </div>
+                            <button className="btn btn-primary" onClick={this.createCourse}>
+                                <i className="fa fa-plus"></i>
+                            </button>
                         </Toolbar>
                     </AppBar>
                 </div>
@@ -103,7 +101,7 @@ class CourseList extends React.Component {
                     <div className="float-left title-Width">Title</div>
                     <div className="float-left owner-Width">Owner</div>
                     <div className="float-left d-last-modified-Width">Date Last Modified</div>
-                    <div className="float-left t-last-modified-Width">Time Last Modified</div>
+                    <div className="float-left t-last-modified-Width">Action</div>
                 </div>
                 <div className="div-parent">
                     {/*                <h2>Course List</h2>

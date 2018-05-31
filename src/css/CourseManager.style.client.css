@@ -12,7 +12,7 @@
 }
 
 .customBox {
-    margin: 0 0 0 9%;
+    margin: 1.2% 0 0 9%;
     width: 52%;
 }
 
@@ -22,19 +22,19 @@
     top: 0;
 }
 
-.panelTextbox {
-    background-color: #6c9aef;
-    border: 1px solid #6c9aef;
-    color: #fff;
+.panel-textbox {
+    background-color: #6c9aef !important;
+    border: 1px solid #6c9aef !important;
+    color: #fff !important;
 }
 
 .form-control::-webkit-input-placeholder {
-    color: white;
+    color: white !important;
 }
 
 .form-control:focus {
-    color: white;
-    background-color: #6c9aef;
+    color: white !important;
+    background-color: #6c9aef !important;
 }
 
 .table-Header {
@@ -45,12 +45,12 @@
     position: fixed;
     top: 0px;
     padding: 0 5%;
-    height: 44px;
+    height: 62px;
 }
 
 .title-Width {
     width: 30%;
-    margin: 13px 0 0 0px;
+    margin: 24px 0 0 0px;
     font-size: 14px;
     color: #555555;
     font-weight: 500;
@@ -59,7 +59,7 @@
 
 .owner-Width {
     width: 30%;
-    margin: 13px 0 0 0px;
+    margin: 24px 0 0 0px;
     font-size: 14px;
     color: #555555;
     font-weight: 500;
@@ -68,7 +68,7 @@
 
 .d-last-modified-Width {
     width: 20%;
-    margin: 13px 0 0 0px;
+    margin: 24px 0 0 0px;
     font-size: 14px;
     color: #555555;
     font-weight: 500;
@@ -77,7 +77,7 @@
 
 .t-last-modified-Width {
     width: 20%;
-    margin: 13px 0 0 0px;
+    margin: 24px 0 0 0px;
     font-size: 14px;
     color: #555555;
     font-weight: 500;
@@ -108,6 +108,7 @@ body {
     display: flex;
     height: 46px;
     width: 100%;
+    padding: 12px 14px;
 }
 
 .div-parent {
@@ -118,29 +119,44 @@ body {
     border-top: 1px solid #d3d3d3;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.07);
 }
-table{
+
+table {
     width: 100%;
 }
 
-.title-row{
+.title-row {
     border-bottom: 1px solid #e3e3e3;
     width: 30%;
 }
 
-.owner-row{
+.owner-row {
     border-bottom: 1px solid #e3e3e3;
     width: 30%;
 }
 
-.date-row{
+.date-row {
     border-bottom: 1px solid #e3e3e3;
     width: 20%;
 }
 
-.time-row{
+.time-row {
     border-bottom: 1px solid #e3e3e3;
     width: 20%;
 }
-.table-data-width{
+
+.table-data-width {
     width: 100%;
+}
+
+.delete-icon {
+    color: red;
+    cursor: pointer;
+}
+
+.action-div {
+    margin: 3px 0 0 227px;
+}
+
+.owner-div{
+    margin: 0 0 0 176px;
 }
