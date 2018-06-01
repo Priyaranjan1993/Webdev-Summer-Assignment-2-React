@@ -10,7 +10,12 @@
     background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.28) 0px 0px 16px;
     background-color: #3366CC;
-    color: white;
+    color: black;
+}
+
+.module-textbox:focus{
+    color: black !important;
+    background-color: transparent !important;
 }
 
 .sidenav {
@@ -20,33 +25,65 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #3366CC;
+    background-color: #fff;
     overflow-x: hidden;
-    padding-top: 104px;
+    padding-top: 18px;
+    padding-right: 0 !important;
 }
 
 .sidenav a {
-    padding: 12px 8px 12px 66px;
+    padding: 18px 8px 18px 18px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 16px;
     color: #818181;
     display: block;
     text-transform: uppercase;
 }
 
 .sidenav a:hover {
-    background-color: #3399FF
+    background-color: #eaf4ff;
 }
 
-.sidenav a:active{
+.sidenav a:active {
     color: #fff;
 }
 
-.clickedStyles{
-    visibility:visible!important;
+.clickedStyles {
+    visibility: visible !important;
     opacity: 1 !important;
 }
 
+.custom-module-box {
+    width: 105%;
+    margin: 0 0 0 19px;
+    padding: 0 0 0 30px;
+}
+
+.module-textbox {
+    width: 82% !important;
+    margin: 0px 2px 0 0px;
+    color: black !important;
+}
+
+.module-submit-btn {
+    margin: 7px 0px 0px 10px;
+    font-size: 27px;
+    color: #3399FF;
+}
+
+.module-icon {
+    color: #3399FF;
+    padding: 0 11px 0 0px;
+    cursor: pointer;
+}
+
+.module-delete-icon{
+    position: absolute;
+    right: 0;
+    padding: 4px 15px 0 0px;
+    cursor: pointer;
+    color: #3399FF;
+}
 /*
 .left-menu-design {
     padding: 10px;
