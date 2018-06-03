@@ -13,7 +13,7 @@
     color: black;
 }
 
-.module-textbox:focus{
+.module-textbox:focus {
     color: black !important;
     background-color: transparent !important;
 }
@@ -77,13 +77,41 @@
     cursor: pointer;
 }
 
-.module-delete-icon{
+.module-delete-icon {
     position: absolute;
     right: 0;
     padding: 4px 15px 0 0px;
     cursor: pointer;
     color: #3399FF;
 }
+
+.lessonListParent {
+    list-style-type: none;
+}
+
+
+.lessonListChild{
+    padding: 20px 0;
+}
+
+.chip-style{
+    width:18%;
+}
+
+.chip-style svg{
+    position: relative;
+    left:53px;
+}
+
+.custom-lesson-box{
+    width: 58%;
+    padding: 34px 0 0 52px;
+}
+
+/*.lessonListParent li{
+    width: 33%;
+    float: left;
+}*/
 /*
 .left-menu-design {
     padding: 10px;

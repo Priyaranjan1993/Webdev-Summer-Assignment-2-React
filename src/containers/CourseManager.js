@@ -4,6 +4,7 @@ import CourseEditor from '../containers/CourseEditor'
 import '../css/CourseManager.style.client.css'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import $ from 'jquery'
+import ModuleEditor from "./modules/ModuleEditor";
 
 const styles = {
     root: {
@@ -38,6 +39,8 @@ class CourseManager extends React.Component {
                             </Route>
                             <Route path="/course/:courseId/edit" component={CourseEditor}>
                             </Route>
+                            {/*<Route path="/course/module/lesson/:cid" component={ModuleEditor}>
+                            </Route>*/}
                         </div>
                     </Router>
                 </div>
