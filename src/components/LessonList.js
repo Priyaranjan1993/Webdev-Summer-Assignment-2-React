@@ -5,8 +5,8 @@ import LessonService from '../services/LessonSevice';
 import Chip from '@material-ui/core/Chip';
 
 
-const SortableItem = SortableElement(({value,onRemove}) =>
-    <a className="clickedStyles">
+const SortableItem = SortableElement(({value,onRemove,click}) =>
+    <a className="clickedStyles" onClick={() => click(value)}>
    {/* <li className="lessonListChild">*/}
        {/* <Chip className="chip-style" label={value}/>*/}
         {value}
@@ -17,12 +17,13 @@ const SortableItem = SortableElement(({value,onRemove}) =>
 );
 
 
-const DraggableLessons = SortableContainer(({items,onRemove}) => {
+const DraggableLessons = SortableContainer(({items,onRemove,click}) => {
     return (
         <div className="lessonListParent">
             {items.map((value, index) => (
                 <SortableItem key={`item-${index}`} index={index}
-                              value={value} onRemove={onRemove}/>
+                              value={value} onRemove={onRemove}
+                              click={click}/>
             ))}
         </div>
     );
@@ -84,6 +85,17 @@ class LessonList extends React.Component {
         this.deleteLessons(object.id);
     }
 
+    generateTopic(index) {
+        let object = {};
+        let position = this.state.lessonTitleList.indexOf(index);
+        object = this.props.lessons[position];
+        this.retriveTopics(object.id);
+    }
+
+    retriveTopics(lessonId){
+        this.props.getTopicsHandler(lessonId);
+    }
+
 
     deleteLessons(lessonId){
         this.props.deleteHandler(this.props.courseId,this.props.moduleId,lessonId);
@@ -101,6 +113,7 @@ class LessonList extends React.Component {
                     <div className="sidenav col-4">
                     <DraggableLessons items={this.state.lessonTitleList} onSortEnd={this.onSortEnd}
                                       onRemove={(index) => this.deleteModule(index)}
+                                      click={(index) => this.generateTopic(index)}
                                       lockAxis="y" axis="y"/>
                     </div>
                 </div>

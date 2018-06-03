@@ -1,6 +1,8 @@
 import React from 'react';
 import LessonService from '../../services/LessonSevice';
+import TopicService from '../../services/TopicService';
 import LessonList from "../../components/LessonList";
+import TopicRow from '../../components/TopicRow';
 
 
 
@@ -9,12 +11,13 @@ export default class ModuleEditor extends React.Component {
     constructor(props) {
         super(props);
         this.lessonService = LessonService.instance;
+        this.topicService = TopicService.instance;
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
         this.findLessonForModule = this.findLessonForModule.bind(this);
         this.createLesson = this.createLesson.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
-        this.state = {courseId: '', moduleId: '',lesson:[]};
+        this.state = {courseId: '', moduleId: '',lesson:[],topics:[]};
     }
 
     componentDidMount() {
@@ -59,12 +62,21 @@ export default class ModuleEditor extends React.Component {
 
     }
 
+    getTopics(lessonId){
+        this.topicService.findAllTopicsForLesson(lessonId)
+            .then((topics) => {
+                this.setState({topics:topics});
+                console.log(topics);
+                })
+    }
+
     renderLessonList() {
         let lessons = null;
         if (this.state.lesson.length != 0) {
             return <LessonList lessons={this.state.lesson} delete={this.deleteCourse}
                                 courseId={this.props.courseId} moduleId={this.props.moduleId}
-                                addHandler={this.createLesson} deleteHandler={this.deleteLesson}/>
+                                addHandler={this.createLesson} deleteHandler={this.deleteLesson}
+                               getTopicsHandler = {this.getTopics}/>
         }
 /*            lessons = this.state.lesson.map(
                 (lessons) => {
@@ -77,12 +89,6 @@ export default class ModuleEditor extends React.Component {
         )
     }
 
-    deleteCourse()
-    {
-        console.log("delete");
-    }
-
-
     setCourseId(courseId) {
         this.setState
         ({courseId: courseId});
@@ -93,14 +99,36 @@ export default class ModuleEditor extends React.Component {
         ({moduleId: moduleId});
     }
 
+    renderTopicRows() {
+        let topics = null;
+        if (this.state.topics.length != 0) {
+            topics = this.state.topics.map(
+                (topic) => {
+                    return <TopicRow key={topic.id} topic={topic}/>
+                }
+            )
+        }
+        return (
+            topics
+        )
+    }
 
     render() {
         return (
-            <div>
-{/*                <h1>Module Editor</h1>
-                <h4>{this.state.courseId},{this.state.moduleId}</h4>*/}
+            <div className="row">
+                <div className="col-7">
                 {this.renderLessonList()}
+                </div>
+                <div className="col-4">
+                    <table>
+                        <tbody>
+                        {this.renderTopicRows()}
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
+
 
         )
     }

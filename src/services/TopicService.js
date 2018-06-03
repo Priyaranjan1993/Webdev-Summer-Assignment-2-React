@@ -1,0 +1,42 @@
+let _singleton = Symbol();
+const TOPIC_API_URL = '/api/course/module/lesson/topic';
+
+export default class TopicService {
+    constructor(singletonToken) {
+        if (_singleton !== singletonToken)
+            throw new Error('Singleton!!!');
+    }
+
+    static get instance() {
+        if (!this[_singleton])
+            this[_singleton] = new TopicService(_singleton);
+        return this[_singleton]
+    }
+
+    createLesson(lessonId,topic) {
+        return fetch(TOPIC_API_URL + '/' + lessonId,
+            {
+                body: JSON.stringify(topic),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            }).then(function (response) {
+            return response.json();
+        })
+    }
+
+
+    findAllTopicsForLesson(lessonId) {
+        if(lessonId!='' && lessonId!=undefined)
+        {
+            return fetch(TOPIC_API_URL + '/' + lessonId)
+                .then(function (response) {
+                    return response.json();
+                })
+        }
+
+    }
+
+
+}
+
+
