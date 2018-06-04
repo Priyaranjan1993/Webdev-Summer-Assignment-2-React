@@ -26,7 +26,7 @@ class CourseRow extends React.Component {
                 </td>
                 <td className="date-row">
                     <div className="row-div">
-                        {this.props.course.modified}
+                        {this.props.course.created}
                     </div>
                 </td>
                 <td className="time-row">

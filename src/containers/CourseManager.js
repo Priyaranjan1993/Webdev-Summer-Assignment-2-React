@@ -39,8 +39,6 @@ class CourseManager extends React.Component {
                             </Route>
                             <Route path="/course/:courseId/edit" component={CourseEditor}>
                             </Route>
-                            {/*<Route path="/course/module/lesson/:cid" component={ModuleEditor}>
-                            </Route>*/}
                         </div>
                     </Router>
                 </div>

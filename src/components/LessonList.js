@@ -9,7 +9,7 @@ const SortableItem = SortableElement(({value,onRemove,click}) =>
     <a className="clickedStyles" onClick={() => click(value)}>
    {/* <li className="lessonListChild">*/}
        {/* <Chip className="chip-style" label={value}/>*/}
-        {value}
+        <span className="lessonTitle">{value}</span>
         {/*onClick={handleClick}*/}
     {/*</li>*/}
         <i className="fa fa-minus-circle module-delete-icon" onClick={() => onRemove(value)}></i>
@@ -35,22 +35,37 @@ class LessonList extends React.Component {
         super(props);
         this.state = {
             lessonTitleList: [],
-            lesson: {title: ''}
+            lesson: {title: ''},
+            lessonList :[]
         };
         this.lessonService = LessonService.instance;
         this.setLessonTitle = this.setLessonTitle.bind(this);
-        this.addLessonTitle = this.addLessonTitle.bind(this);
-        this.createLessons = this.createLessons.bind(this);
+        /*this.addLessonTitle = this.addLessonTitle.bind(this);
+        this.createLessons = this.createLessons.bind(this);*/
     }
 
     componentDidMount() {
         this.setLessonTitle(this.props.lessons);
+        this.setLessonList(this.props.lessons);
     }
 
-    componentWillReceiveProps(newProps) {
+/*    componentWillReceiveProps(newProps) {
         this.setLessonTitle(newProps.lessons);
+    }*/
+
+    static getDerivedStateFromProps(nextProps, prevState){
+        if(nextProps.lessons!==prevState.lessons){
+            return { lessonList: nextProps.lessons};
+        }
+        else return null;
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        if(prevProps.lessons!==this.props.lessons){
+            //Perform some operation here
+            this.setLessonTitle(this.props.lessons);
+        }
+    }
     setLessonTitle(lessonList) {
         this.setState({
             lessonTitleList: lessonList.map(
@@ -59,13 +74,18 @@ class LessonList extends React.Component {
         })
     }
 
+    setLessonList(lessonList) {
+        this.setState({lessonList: lessonList});
+    }
+
+
     onSortEnd = ({oldIndex, newIndex}) => {
         this.setState({
             lessonTitleList: arrayMove(this.state.lessonTitleList, oldIndex, newIndex),
         });
     };
 
-    addLessonTitle(event) {
+/*    addLessonTitle(event) {
         this.setState({
             lesson: {
                 title: event.target.value
@@ -75,21 +95,35 @@ class LessonList extends React.Component {
 
     createLessons() {
         this.props.addHandler(this.props.courseId,this.props.moduleId,this.state.lesson);
-    }
+    }*/
 
     deleteModule(index) {
+/*
         let object = {};
         let position = this.state.lessonTitleList.indexOf(index);
         object = this.props.lessons[position];
-        console.log("delete------"+object);
-        this.deleteLessons(object.id);
+*/
+
+        var results = this.props.lessons.filter(function(lesson) {
+            return lesson.title.indexOf(index) > -1;
+        });
+
+/*        console.log("delete------"+object);*/
+        this.deleteLessons(results[0].id);
     }
 
     generateTopic(index) {
+/*
         let object = {};
         let position = this.state.lessonTitleList.indexOf(index);
         object = this.props.lessons[position];
-        this.retriveTopics(object.id);
+*/
+
+        var results = this.props.lessons.filter(function(lesson) {
+            return lesson.title.indexOf(index) > -1;
+        });
+
+        this.retriveTopics(results[0].id);
     }
 
     retriveTopics(lessonId){
@@ -105,12 +139,12 @@ class LessonList extends React.Component {
     render() {
         return (
                 <div className="lessonListDiv">
-                    <div className="form-group custom-lesson-box row">
+                    {/*<div className="form-group custom-lesson-box row">
                         <input type="text" className="form-control module-textbox"
                                value={this.state.lesson.title} onChange={this.addLessonTitle}/>
                         <i className="fa fa-plus-circle module-submit-btn" onClick={this.createLessons}></i>
-                    </div>
-                    <div className="sidenav col-4">
+                    </div>*/}
+                    <div className="sidenav col-4 customLessonParent">
                     <DraggableLessons items={this.state.lessonTitleList} onSortEnd={this.onSortEnd}
                                       onRemove={(index) => this.deleteModule(index)}
                                       click={(index) => this.generateTopic(index)}

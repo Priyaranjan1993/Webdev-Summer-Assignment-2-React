@@ -20,8 +20,6 @@ import CourseService from '../services/CourseService';
 import ModuleEditor from "./modules/ModuleEditor";
 
 
-/*----------------------------------------------------------------------------------------------------------------*/
-
 class CourseEditor extends React.Component {
     constructor(props) {
         super(props);
@@ -30,8 +28,7 @@ class CourseEditor extends React.Component {
             courseId: '',
             courseTitle: '',
             moduleList: [],
-            moduleId: '',
-            demo: []
+            moduleId: ''
         };
         this.selectCourse = this.selectCourse.bind(this);
         this.setTitle = this.setTitle.bind(this);
@@ -76,7 +73,13 @@ class CourseEditor extends React.Component {
     }
 
     renderLessonRows() {
-                return <ModuleEditor courseId={this.state.courseId} moduleId={this.state.moduleId}/>
+        if(this.state.moduleId != '' && this.state.moduleId != undefined )
+        {
+            return <ModuleEditor courseId={this.state.courseId} moduleId={this.state.moduleId}/>
+        }
+        else{
+            return null;
+        }
     }
 
 

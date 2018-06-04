@@ -12,7 +12,6 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-
 class CourseList extends React.Component {
     constructor() {
         super();
@@ -20,6 +19,7 @@ class CourseList extends React.Component {
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
+        this.search = this.search.bind(this);
         this.state = {courses: []};
     }
 
@@ -33,6 +33,7 @@ class CourseList extends React.Component {
             .then((courses) => {
                 this.setState({courses: courses});
                 console.log(courses);
+                alert("Table Data Refreshed");
             });
     }
 
@@ -41,6 +42,7 @@ class CourseList extends React.Component {
             .createCourse(this.state.course)
             .then(() => {
                 this.findAllCourses();
+                alert("Course created");
             });
     }
 
@@ -49,6 +51,7 @@ class CourseList extends React.Component {
             .deleteCourse(courseId)
             .then(() => {
                 this.findAllCourses();
+                alert("Course deleted");
             });
     }
 
@@ -74,6 +77,33 @@ class CourseList extends React.Component {
         });
     }
 
+    search(event) {
+        var title = event.target.value;
+
+        var inputData;
+        var modData;
+        var tableDom;
+        var tr;
+        var td;
+        var index;
+
+        inputData = title;
+        modData = inputData.toUpperCase();
+        tableDom = document.getElementById("myTable");
+        tr = tableDom.getElementsByTagName("tr");
+        for (index = 0; index < tr.length; index++) {
+            td = tr[index].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.innerHTML.toUpperCase().indexOf(modData) > -1) {
+                    tr[index].style.display = "";
+                } else {
+                    tr[index].style.display = "none";
+                }
+            }
+        }
+
+    }
+
 
     render() {
         return (
@@ -84,7 +114,7 @@ class CourseList extends React.Component {
                             <IconButton className="menuButton" color="inherit" aria-label="Menu">
                                 <MenuIcon/>
                             </IconButton>
-                            <Typography variant="title" color="inherit">
+                            <Typography variant="title" color="inherit" className="appbarTitle">
                                 Course Manager
                             </Typography>
                             <div className="form-group customBox">
@@ -94,6 +124,10 @@ class CourseList extends React.Component {
                             <button className="btn btn-primary" onClick={this.createCourse}>
                                 <i className="fa fa-plus"></i>
                             </button>
+                            <div className="form-group customBox">
+                                <input type="text" className="form-control panel-textbox" id="usr"
+                                       placeholder="Search Course Name" onChange={this.search}/>
+                            </div>
                         </Toolbar>
                     </AppBar>
                 </div>
@@ -104,7 +138,7 @@ class CourseList extends React.Component {
                     <div className="float-left t-last-modified-Width">Action</div>
                 </div>
                 <div className="div-parent">
-                    <table>
+                    <table id="myTable">
                         <tbody>
                         {this.renderCourseRows()}
                         </tbody>

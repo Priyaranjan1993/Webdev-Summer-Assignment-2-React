@@ -1,5 +1,5 @@
 let _singleton = Symbol();
-const TOPIC_API_URL = '/api/course/module/lesson/topic';
+const TOPIC_API_URL = 'http://localhost:8080/api/course/module/lesson/topic';
 
 export default class TopicService {
     constructor(singletonToken) {
@@ -13,7 +13,7 @@ export default class TopicService {
         return this[_singleton]
     }
 
-    createLesson(lessonId,topic) {
+    createTopic(lessonId,topic) {
         return fetch(TOPIC_API_URL + '/' + lessonId,
             {
                 body: JSON.stringify(topic),

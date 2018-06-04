@@ -63,12 +63,14 @@
     width: 82% !important;
     margin: 0px 2px 0 0px;
     color: black !important;
+    text-transform: uppercase;
 }
 
 .module-submit-btn {
     margin: 7px 0px 0px 10px;
     font-size: 27px;
     color: #3399FF;
+    cursor: pointer;
 }
 
 .module-icon {
@@ -83,53 +85,52 @@
     padding: 4px 15px 0 0px;
     cursor: pointer;
     color: #3399FF;
+    font-size: 20px;
 }
 
 .lessonListParent {
     list-style-type: none;
+    margin: -18px 0 0 8px;
 }
 
-
-.lessonListChild{
+.lessonListChild {
     padding: 20px 0;
 }
 
-.chip-style{
-    width:18%;
+.chip-style {
+    width: 18%;
 }
 
-.chip-style svg{
+.lesson-topic{
+    margin: 0 0 0 40px;
+    color: grey;
+    text-decoration: underline;
+}
+
+.module-topic{
+    color: grey;
+    margin: 0 0 0 16px;
+    text-decoration: underline;
+}
+
+.chip-style svg {
     position: relative;
-    left:53px;
+    left: 53px;
 }
 
-.custom-lesson-box{
+.custom-lesson-box {
     width: 58%;
-    padding: 34px 0 0 52px;
+    padding: 18px 0 0 52px;
 }
 
-/*.lessonListParent li{
-    width: 33%;
-    float: left;
-}*/
-/*
-.left-menu-design {
-    padding: 10px;
-    font-size: 1.1em;
-    display: block;
+.moduletext {
+    cursor: pointer;
 }
 
-.left-menu-design a,.left-menu-design a:hover,.left-menu-design a:focus{
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-.left-menu-design:hover{
-    background-color: #3399FF !important;
+.lessonTitle {
+    cursor: pointer;
 }
 
-
-.left-menu-design ul li.active > a {
-    color: #fff;
-    background: #6d7fcc;
-}*/
+.customLessonParent{
+    max-width: 53.5% !important;
+}

@@ -12,10 +12,11 @@ import ModuleService from '../../services/ModuleService';
 
 
 const SortableItem = SortableElement(({value, onRemove, click}) =>
-    <a className="clickedStyles" onClick={() => click(value)}>
-        <i className="fa fa-book module-icon"></i>
-        {/*<Link to={`/course/module/lesson/62`} className="table-data-width">*/}{value}{/*</Link>*/}
-        <i className="fa fa-minus-circle module-delete-icon" onClick={() => onRemove(value)}></i>
+    <a className="clickedStyles">
+        <span className="moduletext" onClick={() => click(value)}><i className="fa fa-book module-icon"></i>
+        {/*<Link to={`/course/module/lesson/62`} className="table-data-width">*/}{/*</Link>*/}
+        {value}</span>
+        <span><i className="fa fa-minus-circle module-delete-icon" onClick={() => onRemove(value)}></i></span>
     </a>
 );
 
@@ -23,6 +24,7 @@ const SortableItem = SortableElement(({value, onRemove, click}) =>
 const SortableList = SortableContainer(({items, onRemove, click}) => {
     return (
         <div>
+            <span className="module-topic">Modules</span>
             {items.map((value, index) => (
                 <SortableItem key={`item-${index}`} index={index}
                               value={value} onRemove={onRemove}
@@ -77,36 +79,42 @@ export default class ModuleList extends React.Component {
     }
 
     deleteModule(index) {
-        let object = {};
-        let position = this.state.title.indexOf(index);
-        object = this.state.moduleList[position];
-        console.log(object);
+      /*  let object = {};*/
+        var results = this.state.moduleList.filter(function(module) {
+            return module.title.indexOf(index) > -1;
+        });
+
+        /*let position = this.state.title.indexOf(index);
+        object = this.state.moduleList[position];*/
+        console.log(results);
         this.moduleService
-            .deleteModule(object.id)
+            .deleteModule(results[0].id)
             .then(() => {
-                this.removeModule(position);
+                this.removeModule();
             });
 
     }
 
     generateLesson(index) {
-        let object = {};
-        let position = this.state.title.indexOf(index);
-        object = this.state.moduleList[position];
-        this.setState({moduleId: object.id});
+        var arr = this.state.moduleList.filter(function(module) {
+            return module.title.indexOf(index) > -1;
+        });
+        this.setState({moduleId: arr[0].id});
         console.log(this.state);
-        //alert(this.state.moduleId);
-        this.props.handlerFromParant(object.id);
+        this.props.handlerFromParant(arr[0].id);
     }
 
-    removeModule(index) {
-        const itemTobeRemovedFromModule = this.state.moduleList;
+    removeModule() {
+        let ccid = this.state.courseId;
+/*        const itemTobeRemovedFromModule = this.state.moduleList;
         const itemTobeRemovedFromTitle = this.state.title;
         itemTobeRemovedFromModule.splice(index, 1);
         itemTobeRemovedFromTitle.splice(index, 1);
 
         this.setState({moduleList: itemTobeRemovedFromModule});
-        this.setState({title: itemTobeRemovedFromTitle});
+        this.setState({title: itemTobeRemovedFromTitle});*/
+        alert("Module Deleted");
+        this.findAllModulesForCourse(ccid);
     }
 
     setModuleTitle(event) {
@@ -123,6 +131,12 @@ export default class ModuleList extends React.Component {
             .createModule(this.state.courseId, this.state.module)
             .then((response) => {
                 this.findAllModulesForCourse(ccid);
+                this.setState({
+                    module: {
+                        title: ''
+                    }
+                })
+                alert("Module Added");
             });
     }
 
@@ -134,6 +148,7 @@ export default class ModuleList extends React.Component {
                 /*this.setState({moduleList: courses.modules});*/
                 this.setModuleList(courses.modules);
                 console.log(courses);
+                alert("Module List Loaded");
             });
     }
 
