@@ -204,7 +204,7 @@ export default class ModuleList extends React.Component {
                 /*this.setState({moduleList: courses.modules});*/
                 this.setModuleList(courses.modules);
                 console.log(courses);
-                alert("Module List Loaded");
+                //alert("Module List Loaded");
             });
     }
 

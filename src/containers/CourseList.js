@@ -58,7 +58,7 @@ class CourseList extends React.Component {
             .then((courses) => {
                 this.setState({courses: courses});
                 console.log(courses);
-                alert("Table Data Refreshed");
+               // alert("Table Data Refreshed");
             });
     }
 

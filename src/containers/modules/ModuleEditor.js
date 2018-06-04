@@ -92,7 +92,7 @@ export default class ModuleEditor extends React.Component {
             this.lessonService.findAllLessonsForModule(courseId, moduleId)
                 .then((lessons) => {
                     this.setState({lesson: lessons});
-                    alert("Lesson List Refreshed");
+                    //alert("Lesson List Refreshed");
                     console.log(lessons);
                     //this.renderLessonList();
                 });
@@ -117,7 +117,7 @@ export default class ModuleEditor extends React.Component {
         this.topicService.findAllTopicsForLesson(lessonId)
             .then((topics) => {
                 this.setState({topics: topics});
-                alert("Topic List Rendered");
+                //alert("Topic List Rendered");
                 console.log(topics);
             })
     }
