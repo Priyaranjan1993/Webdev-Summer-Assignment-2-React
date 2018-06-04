@@ -1,7 +1,7 @@
 let _singleton = Symbol();
-const MODULE_API_URL = 'http://localhost:8080/api/course/COURSE_ID/module';
-const MODULEID_API_URL = 'http://localhost:8080/api/module/MODULE_ID';
-const MODUL_API_URL = 'http://localhost:8080/api/module';
+const MODULE_API_URL = 'https://peaceful-inlet-41065.herokuapp.com/api/course/COURSE_ID/module';
+const MODULEID_API_URL = 'https://peaceful-inlet-41065.herokuapp.com/api/module/MODULE_ID';
+const MODUL_API_URL = 'https://peaceful-inlet-41065.herokuapp.com/api/module';
 
 export default class ModuleService {
     constructor(singletonToken) {
