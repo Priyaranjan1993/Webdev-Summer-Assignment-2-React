@@ -12,7 +12,7 @@ class TopicRow extends React.Component {
     render() {
         return (
             <tr>
-                <td className="title-row">
+                <td className="topic-title-row">
                     <div className="row-div float-left">
                             {this.props.topic.title}
                     </div>

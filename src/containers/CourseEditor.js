@@ -28,7 +28,8 @@ class CourseEditor extends React.Component {
             courseId: '',
             courseTitle: '',
             moduleList: [],
-            moduleId: ''
+            moduleId: '',
+            moduleName:''
         };
         this.selectCourse = this.selectCourse.bind(this);
         this.setTitle = this.setTitle.bind(this);
@@ -64,18 +65,19 @@ class CourseEditor extends React.Component {
             });
     }
 
-    getModuleId(data) {
+    getModuleId(data,val) {
         this.setState({
-            moduleId: data
+            moduleId: data,moduleName:val
         });
-        console.log("from ceditor list -- "+this.state);
+        //console.log("from ceditor list -- "+this.state);
         //alert(this.state.moduleId);
     }
 
     renderLessonRows() {
         if(this.state.moduleId != '' && this.state.moduleId != undefined )
         {
-            return <ModuleEditor courseId={this.state.courseId} moduleId={this.state.moduleId}/>
+            return <ModuleEditor courseId={this.state.courseId} moduleId={this.state.moduleId}
+                                 moduleName={this.state.moduleName}/>
         }
         else{
             return null;

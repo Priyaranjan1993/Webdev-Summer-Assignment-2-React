@@ -28,11 +28,11 @@
     color: #fff !important;
 }
 
-.form-control::-webkit-input-placeholder {
+.panel-textbox::-webkit-input-placeholder {
     color: white !important;
 }
 
-.form-control:focus {
+.panel-textbox:focus {
     color: white !important;
     background-color: #6c9aef !important;
 }
@@ -101,6 +101,7 @@
 body {
     background-color: #eee;
     font-family: Roboto,Arial,sans-serif!important;
+    overflow-x: hidden;
 }
 
 .row-div {

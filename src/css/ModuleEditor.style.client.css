@@ -84,7 +84,7 @@
     right: 0;
     padding: 4px 15px 0 0px;
     cursor: pointer;
-    color: #3399FF;
+    color: red;
     font-size: 20px;
 }
 
@@ -133,4 +133,57 @@
 
 .customLessonParent{
     max-width: 53.5% !important;
+}
+
+.custom-topic-box{
+    width: 95%;
+    padding: 18px 0 0 52px;
+}
+
+.topic-submit-btn{
+    margin: 5px 0px 0px 10px;
+    font-size: 27px;
+    color: #3399FF;
+    cursor: pointer;
+}
+
+.topic-table{
+    width: 69%;
+    margin: 0px 0px 0 37px;
+    /*border: 1px solid black;*/
+}
+
+.topic-title-row{
+    /*border-bottom: 1px solid black;*/
+    text-transform: uppercase;
+}
+
+.topicdiv{
+    position: fixed !important;
+    right: 8%;
+}
+
+.topic-input-hide{
+    display: none !important;
+}
+
+.topic-input-show{
+    display: none !important;
+}
+
+
+table.topic-table tbody {
+    height: 241px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display:block;
+}
+
+table.topic-table tbody tr{
+    display: table;
+    width: 100%;
+}
+
+.active{
+    background-color: lightsteelblue;
 }
