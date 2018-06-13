@@ -1,3 +1,9 @@
+
+Webdev-Summer-Assignment1 repository contains the backend part built using spring boot. Webdev-Summer-Assignment-2-React repository contains the front-end part built using React.
+
+To start the application , please enter protocol/domain-name/courses
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
