@@ -4,6 +4,8 @@ import TopicService from '../../services/TopicService';
 import LessonList from "../../components/LessonList";
 import TopicRow from '../../components/TopicRow';
 
+import WidgetList from '../WidgetList'
+
 export default class ModuleEditor extends React.Component {
 
     constructor(props) {
@@ -16,14 +18,14 @@ export default class ModuleEditor extends React.Component {
         this.createLesson = this.createLesson.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
         this.getTopics = this.getTopics.bind(this);
-        this.preGetTopics = this.preGetTopics.bind(this);
+        /*this.preGetTopics = this.preGetTopics.bind(this);*/
         this.addLessonTitle = this.addLessonTitle.bind(this);
         this.addTopicTitle = this.addTopicTitle.bind(this);
         this.callCreateLessons = this.callCreateLessons.bind(this);
         this.callCreateTopics = this.callCreateTopics.bind(this);
         this.state = {
             courseId: '', moduleId: '', lesson: [], topics: [], lessonInput: {title: ''},
-            topicInput: {title: ''}, lessonId: '',lessonName:''
+            topicInput: {title: ''}, lessonId: '', lessonName: ''
         };
     }
 
@@ -31,7 +33,7 @@ export default class ModuleEditor extends React.Component {
         this.setCourseId(this.props.courseId);
         this.setModuleId(this.props.moduleId);
         this.findLessonForModule(this.props.courseId, this.props.moduleId);
-        document.getElementById("topic-input-id").style.display = "none";
+        /* document.getElementById("topic-input-id").style.display = "none";*/
         this.setState({topics: []});
     }
 
@@ -80,7 +82,7 @@ export default class ModuleEditor extends React.Component {
                 this.setState({topics: []});
                 this.setState({
                     topicInput: {
-                        title:''
+                        title: ''
                     }
                 })
                 document.getElementById("topic-input-id").style.display = "none";
@@ -101,16 +103,16 @@ export default class ModuleEditor extends React.Component {
 
     }
 
-    preGetTopics(lessonId,val,name){
-        if(val==true)
-        {
+    preGetTopics(lessonId, val, name) {
+        console.log("No action plz")
+        /*if (val == true) {
             document.getElementById("topic-input-id").style.display = "block";
             this.getTopics(lessonId);
-            this.setState({lessonName:name});
+            this.setState({lessonName: name});
         }
-        else{
+        else {
             document.getElementById("topic-input-id").style.display = "none";
-        }
+        }*/
     }
 
     getTopics(lessonId) {
@@ -152,20 +154,20 @@ export default class ModuleEditor extends React.Component {
         ({moduleId: moduleId});
     }
 
-    renderTopicRows() {
-        let topics = null;
-        if (this.state.topics.length != 0) {
-            document.getElementById("topic-input-id").style.display = "block";
-            topics = this.state.topics.map(
-                (topic) => {
-                    return <TopicRow key={topic.id} topic={topic}/>
-                }
-            )
-        }
-        return (
-            topics
-        )
-    }
+    /*  renderTopicRows() {
+          let topics = null;
+          if (this.state.topics.length != 0) {
+              document.getElementById("topic-input-id").style.display = "block";
+              topics = this.state.topics.map(
+                  (topic) => {
+                      return <TopicRow key={topic.id} topic={topic}/>
+                  }
+              )
+          }
+          return (
+              topics
+          )
+      }*/
 
     addLessonTitle(event) {
         this.setState({
@@ -207,7 +209,8 @@ export default class ModuleEditor extends React.Component {
                         for <span className="text-uppercase font-weight-bold">{this.props.moduleName}</span></span>
                     {this.renderLessonList()}
                 </div>
-                <div className="col-4 topicdiv" id="topic-input-id">
+                <WidgetList/>
+                {/*<div className="col-4 topicdiv" id="topic-input-id">
                     <div>
                         <div className="form-group custom-topic-box row">
                             <input type="text" className="form-control module-textbox"
@@ -224,7 +227,7 @@ export default class ModuleEditor extends React.Component {
                         {this.renderTopicRows()}
                         </tbody>
                     </table>
-                </div>
+                </div>*/}
 
             </div>
 
