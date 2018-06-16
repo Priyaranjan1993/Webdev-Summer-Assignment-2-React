@@ -140,7 +140,7 @@ const stateToPropsMapperList = state => ({
 const ListContainer = connect(stateToPropsMapperList, dispatchToPropsMapperList)(List);
 
 
-const Image = ({widget,preview,searchNameChanged,widgeImageSrcChanged,widgetNameImageChanged}) => {
+const Image = ({widget,preview,assignUrl,searchNameChanged,searchNameRender,widgetImageSrcChanged,widgetNameImageChanged}) => {
     let name;
     let imageUrl;
     let imageWidgetName;
@@ -150,28 +150,40 @@ const Image = ({widget,preview,searchNameChanged,widgeImageSrcChanged,widgetName
             <div>
                 <h2>Image</h2>
                 <input value={widget.searchName}
+                       onChange={() => searchNameChanged(widget.id, name.value)}
                        ref={node => name = node}/>
-                <button onClick={() => searchNameChanged(widget.id, name.value)}>Search</button>
+                <button onClick={() => searchNameRender(widget.id, name.value)}>Search</button>
                 <input value={widget.src}
-                       onChange={() => widgeImageSrcChanged(widget.id, imageUrl.value)}
+                       onChange={() => widgetImageSrcChanged(widget.id, imageUrl.value)}
                        ref={node => imageUrl = node}/>
                 <input value={widget.widgetNameImage}
                        onChange={() => widgetNameImageChanged(widget.id, imageWidgetName.value)}
                        ref={node => imageWidgetName = node}/>
             </div>
             <h3>Preview</h3>
-            <image src={widget.src} alt={widget.searchName}/>
+            {/*<image src={widget.src} alt={widget.searchName}/>*/}
+            {widget.imageArray.items != undefined && <div>
+                {widget.imageArray.items.map((x) =>(
+                       <img src={x.image.thumbnailLink} alt={widget.searchName}
+                            onClick={() => assignUrl(widget.id, x.image.thumbnailLink)}/>
+                ))}
+            </div>}
         </div>
     )
 };
 
 const dispatchToPropsMapperImage = dispatch => ({
-    listElemChanged: (widgetId, listOrder) =>
-        actions.listElemChanged(dispatch, widgetId, listOrder),
-    widgetListNameChanged: (widgetId, listName) =>
-        actions.widgetListNameChanged(dispatch, widgetId, listName),
-    listTextChanged: (widgetId, listText) =>
-        actions.listTextChanged(dispatch, widgetId, listText)
+    searchNameChanged: (widgetId, searchName) =>
+        actions.searchNameChanged(dispatch, widgetId, searchName),
+    searchNameRender: (widgetId, searchName) =>
+        actions.searchNameRender(dispatch, widgetId, searchName),
+    widgetImageSrcChanged: (widgetId, imageSrc) =>
+        actions.widgetImageSrcChanged(dispatch, widgetId, imageSrc),
+    widgetNameImageChanged: (widgetId, imageWidgetName) =>
+        actions.widgetNameImageChanged(dispatch, widgetId, imageWidgetName),
+    assignUrl: (widgetId, imageUrl) =>
+        actions.assignUrl(dispatch, widgetId, imageUrl)
+
 });
 
 const stateToPropsMapperImage = state => ({
@@ -224,7 +236,7 @@ const Widget = ({widget, preview, orderNoum, allWidgets, dispatch, downButton}) 
                 {widget.widgetType === 'Heading' && <HeadingContainer widget={widget}/>}
                 {widget.widgetType === 'Paragraph' && <ParagraphContainer widget={widget}/>}
                 {widget.widgetType === 'List' && <ListContainer widget={widget}/>}
-                {widget.widgetType === 'Image' && <Image/>}
+                {widget.widgetType === 'Image' && <ImageContainer widget={widget}/>}
             </div>
         </li>
     )

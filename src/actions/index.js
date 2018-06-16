@@ -1,4 +1,5 @@
 import * as constants from '../constants/index'
+import $ from "jquery";
 
 
 export const findAllWidgets = dispatch => {
@@ -84,5 +85,68 @@ export const listTextChanged = (dispatch, widgetId, listText) => (
         type: constants.LIST_TEXT_CHANGED,
         id: widgetId,
         listText: listText
+    })
+);
+
+export const searchNameChanged = (dispatch, widgetId, searchName) => (
+    dispatch({
+        type: constants.SEARCH_NAME_CHANGED,
+        id: widgetId,
+        searchName: searchName
+    })
+);
+
+export const searchNameRender = (dispatch, widgetId, searchName) => (
+/*    dispatch({
+        type: constants.SEARCH_NAME_RENDER,
+        id: widgetId,
+        searchName: searchName
+    })*/
+    $.ajax({
+        type: "GET",
+        dataType: "jsonp",
+        url: "https://www.googleapis.com/customsearch/v1",
+        data: {
+            key: "AIzaSyCf9F4hKshY8PBNnGGunkGcu6Ip3dvaeU4",
+            cx: "004286675445984025592:ypgpkv9fjd4",
+            filter: "1",
+            searchType: "image",
+            start:1,
+            q: searchName
+        }
+    }).done(function(data) {
+        console.log(data);
+        var googleResults = data.items;
+        console.log(googleResults);
+    }).
+        done(googleResults => dispatch({
+        type: constants.SEARCH_NAME_RENDER,
+        id: widgetId,
+        imageResults: googleResults
+}))
+);
+
+
+export const widgetImageSrcChanged = (dispatch, widgetId, imageSrc) => (
+    dispatch({
+        type: constants.WIDGET_IMAGE_SRC_CHANGED,
+        id: widgetId,
+        src: imageSrc
+    })
+);
+
+export const widgetNameImageChanged = (dispatch, widgetId, imageWidgetName) => (
+    dispatch({
+        type: constants.WIDGET_NAME_IMAGE_CHANGED,
+        id: widgetId,
+        widgetNameImage: imageWidgetName
+    })
+);
+
+export const assignUrl = (dispatch, widgetId, imageUrl) => (
+    dispatch({
+        type: constants.ASSIGN_URL,
+        id: widgetId,
+        selectedImageUrl: imageUrl
     })
 );

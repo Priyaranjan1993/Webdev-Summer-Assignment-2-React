@@ -1,4 +1,5 @@
 import * as constants from "../constants/index"
+import $ from 'jquery'
 
 export const WidgetReducer = (state = {
     widgets: [],
@@ -47,6 +48,10 @@ export const WidgetReducer = (state = {
                         widgetNameList:'',
                         listText:'',
                         listTextToArray:[],
+                        searchName:'',
+                        src:'',
+                        imageArray:[],
+                        widgetNameImage:'',
                         orderNum: state.orderNumber
                     }
                 ], orderNumber: state.orderNumber,
@@ -234,6 +239,40 @@ export const WidgetReducer = (state = {
                 }), orderNumber: state.orderNumber,
                 orderArray : state.orderArray
             };
+
+        case constants.SEARCH_NAME_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.searchName = action.searchName;
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray : state.orderArray
+            };
+
+        case constants.SEARCH_NAME_RENDER:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.imageArray = action.imageResults;
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray : state.orderArray
+            };
+
+        case constants.ASSIGN_URL:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.src = action.selectedImageUrl;
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray : state.orderArray
+            };
+
 
         default:
             return state;
