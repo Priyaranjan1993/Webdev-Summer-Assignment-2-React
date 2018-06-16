@@ -197,7 +197,7 @@ export default class ModuleEditor extends React.Component {
 
     render() {
         return (
-            <div className="row">
+            <div className="">
                 <div className="col-7" id="lesson-input-id">
                     <div className="form-group custom-lesson-box row">
                         <input type="text" className="form-control module-textbox"
