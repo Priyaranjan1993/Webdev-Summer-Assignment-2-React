@@ -41,7 +41,7 @@ export const WidgetReducer = (state = {
                         text: 'New Widget',
                         widgetType: 'Heading',
                         size: '1',
-                        widgetName:'',
+                        widgetName:'Widget Name',
                         paragraphText:'',
                         widgetNamePara:'',
                         listSelect:'1',
@@ -52,6 +52,9 @@ export const WidgetReducer = (state = {
                         src:'',
                         imageArray:[],
                         widgetNameImage:'',
+                        linkText:'',
+                        linkUrl:'',
+                        linkName:'',
                         orderNum: state.orderNumber
                     }
                 ], orderNumber: state.orderNumber,
@@ -273,7 +276,38 @@ export const WidgetReducer = (state = {
                 orderArray : state.orderArray
             };
 
+        case constants.LINK_TEXT_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.linkText = action.linkText;
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray : state.orderArray
+            };
 
+        case constants.LINK_URL_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.linkUrl = action.linkUrl;
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray : state.orderArray
+            };
+
+        case constants.WIDGET_NAME_LINK_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.linkName = action.linkName;
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray : state.orderArray
+            };
         default:
             return state;
     }

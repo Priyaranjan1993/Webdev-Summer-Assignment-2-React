@@ -150,3 +150,27 @@ export const assignUrl = (dispatch, widgetId, imageUrl) => (
         selectedImageUrl: imageUrl
     })
 );
+
+export const linkTextChanged = (dispatch, widgetId, linkText) => (
+    dispatch({
+        type: constants.LINK_TEXT_CHANGED,
+        id: widgetId,
+        linkText: linkText
+    })
+);
+
+export const linkURLChanged = (dispatch, widgetId, linkUrl) => (
+    dispatch({
+        type: constants.LINK_URL_CHANGED,
+        id: widgetId,
+        linkUrl: linkUrl
+    })
+);
+
+export const widgetLinkNameChanged = (dispatch, widgetId, linkName) => (
+    dispatch({
+        type: constants.WIDGET_NAME_LINK_CHANGED,
+        id: widgetId,
+        linkName: linkName
+    })
+);

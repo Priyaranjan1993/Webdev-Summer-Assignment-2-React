@@ -9,6 +9,10 @@ import '../css/CourseManager.style.client.css'
 import '../css/ModuleEditor.style.client.css'
 import '../../node_modules/font-awesome/css/font-awesome.min.css'
 import '../../node_modules/bootstrap/dist/css/bootstrap.css'
+import '../../node_modules/mdbootstrap/css/bootstrap.css'
+import '../../node_modules/mdbootstrap/css/mdb.css'
+import '../../node_modules/mdbootstrap/css/style.css'
+
 import './modules/ModuleEditor'
 
 import AppBar from '@material-ui/core/AppBar'
@@ -16,6 +20,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
 import Clear from '@material-ui/icons/Clear'
+
 import CourseService from '../services/CourseService';
 import ModuleEditor from "./modules/ModuleEditor";
 

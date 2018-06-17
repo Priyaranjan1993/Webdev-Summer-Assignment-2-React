@@ -198,7 +198,7 @@ export default class ModuleEditor extends React.Component {
     render() {
         return (
             <div className="">
-                <div className="col-7" id="lesson-input-id">
+                <div className="col-12" id="lesson-input-id">
                     <div className="form-group custom-lesson-box row">
                         <input type="text" className="form-control module-textbox"
                                value={this.state.lessonInput.title} onChange={this.addLessonTitle}

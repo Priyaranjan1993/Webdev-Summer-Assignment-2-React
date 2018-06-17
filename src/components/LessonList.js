@@ -17,20 +17,20 @@ function Transition(props) {
 }
 
 const SortableItem = SortableElement(({value, onRemove, click}) =>
-    <a className="clickedStyles" onClick={() => click(value)}>
+    <a className="clickedStyles lessonTabs-Align" onClick={() => click(value)}>
         {/* <li className="lessonListChild">*/}
         {/* <Chip className="chip-style" label={value}/>*/}
         <span className="lessonTitle">{value}</span>
         {/*onClick={handleClick}*/}
         {/*</li>*/}
-        <i className="fa fa-minus-circle module-delete-icon" onClick={() => onRemove(value)}></i>
+        <i className="fa fa-minus-circle lesson-delete-icon" onClick={() => onRemove(value)}></i>
     </a>
 );
 
 
 const DraggableLessons = SortableContainer(({items, onRemove, click}) => {
     return (
-        <div className="lessonListParent" id="lessonListParentId">
+        <div className="lessonListParent row" id="lessonListParentId">
             {items.map((value, index) => (
                 <SortableItem key={`item-${index}`} index={index}
                               value={value} onRemove={onRemove}
@@ -169,11 +169,11 @@ class LessonList extends React.Component {
                                value={this.state.lesson.title} onChange={this.addLessonTitle}/>
                         <i className="fa fa-plus-circle module-submit-btn" onClick={this.createLessons}></i>
                     </div>*/}
-                <div className="sidenav col-4 customLessonParent">
+                <div className="sidenav col-12">
                     <DraggableLessons items={this.state.lessonTitleList} onSortEnd={this.onSortEnd}
                                       onRemove={(index) => this.handleClickOpen(index)}
                                       click={(index) => this.generateTopic(index)}
-                                      lockAxis="y" axis="y"/>
+                                      lockAxis="xy" axis="xy"/>
                 </div>
                 <Dialog
                     open={this.state.open}

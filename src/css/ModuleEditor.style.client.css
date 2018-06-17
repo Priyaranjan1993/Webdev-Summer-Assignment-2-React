@@ -53,6 +53,10 @@
     opacity: 1 !important;
 }
 
+.lessonTabs-Align{
+    width: 20%;
+}
+
 .custom-module-box {
     width: 105%;
     margin: 0 0 0 19px;
@@ -83,6 +87,15 @@
     position: absolute;
     right: 0;
     padding: 4px 15px 0 0px;
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
+}
+
+
+.lesson-delete-icon {
+    right: 0;
+    padding: 4px 15px 0 14px;
     cursor: pointer;
     color: red;
     font-size: 20px;
