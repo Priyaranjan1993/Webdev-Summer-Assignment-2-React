@@ -1,6 +1,12 @@
 import * as constants from '../constants/index'
 import $ from "jquery";
 
+function viewSuccess(str) {
+        var x3 = document.getElementById("view");
+        x3.className = "show";
+        setTimeout(function(){ x3.className = x3.className.replace("show", ""); }, 3000);
+}
+
 
 export const findAllWidgets = (dispatch,lessonId) => {
     fetch('http://localhost:8080/api/lesson/lessonId/widget'.replace('lessonId',lessonId))
@@ -10,7 +16,7 @@ export const findAllWidgets = (dispatch,lessonId) => {
         .then(widgets => dispatch({
             type: constants.FIND_ALL_WIDGETS,
             widgets: widgets
-        }))
+        })).then(viewSuccess)
 };
 
 

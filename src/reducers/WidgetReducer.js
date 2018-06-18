@@ -1,12 +1,28 @@
 import * as constants from "../constants/index"
 import $ from 'jquery'
 
+function successFn(str) {
+    console.log(str);
+   if(str[0] === "error"||str[0] === null)
+    {
+        var x1 = document.getElementById("error");
+        x1.className = "show";
+        setTimeout(function(){ x1.className = x1.className.replace("show", ""); }, 6000);
+    }
+    else{
+       var x2 = document.getElementById("success");
+       x2.className = "show";
+       setTimeout(function(){ x2.className = x2.className.replace("show", ""); }, 3000);
+    }
+
+}
+
 export const WidgetReducer = (state = {
     widgets: [],
     preview: false,
     orderNumber: 0,
     orderArray: [],
-    downButton : true
+    downButton: true
 }, action) => {
     let newState;
     var orderNumber;
@@ -32,44 +48,52 @@ export const WidgetReducer = (state = {
 
         case constants.ADD_WIDGET:
             state.orderNumber++;
-            var uid =  Math.floor(1000 + Math.random() * 9000);
-            return {
+            var uid = Math.floor(1000 + Math.random() * 9000);
+            let newStates = {
                 widgets: [
-                    ...state.widgets,
+                    ...state.widgets.map(widget => {
+                            widget.innerPreview = 'true';
+                            return Object.assign({}, widget);
+                        }
+                    ),
                     {
                         id: uid,
                         text: 'New Widget',
                         widgetType: 'Heading',
                         size: '1',
-                        widgetName:'Widget Name',
-                        paragraphText:'',
-                        widgetNamePara:'Widget Name',
-                        listSelect:'1',
-                        widgetNameList:'Widget Name',
-                        listText:'',
-                        listTextToArray:[],
-                        searchName:'',
-                        src:'',
-                        imageArray:[],
-                        widgetNameImage:'Widget Name',
-                        linkText:'',
-                        linkUrl:'',
-                        linkName:'Widget Name',
+                        widgetName: 'Widget Name',
+                        paragraphText: '',
+                        widgetNamePara: 'Widget Name',
+                        listSelect: '1',
+                        widgetNameList: 'Widget Name',
+                        listText: '',
+                        listTextToArray: [],
+                        searchName: '',
+                        src: '',
+                        imageArray: [],
+                        widgetNameImage: 'Widget Name',
+                        linkText: '',
+                        linkUrl: '',
+                        linkName: 'Widget Name',
+                        innerPreview: 'false',
                         orderNum: state.orderNumber
                     }
                 ], orderNumber: state.orderNumber,
                 orderArray: state.orderArray
             };
+            return newStates;
 
         case constants.SAVE:
             let lessonId = action.lessonId;
-            fetch('http://localhost:8080/api/lesson/lessonId/widget'.replace('lessonId',lessonId),{
+            fetch('http://localhost:8080/api/lesson/lessonId/widget'.replace('lessonId', lessonId), {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
                 headers: {
                     'content-type': 'application/json'
                 }
-            });
+            }).then(response =>
+                (response.json())
+            ).then(successFn);
             return state;
 
         case constants.SELECT_WIDGET_TYPE:
@@ -93,7 +117,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.HEADING_SIZE_CHANGED:
@@ -104,7 +128,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.WIDGET_NAME_CHANGED:
@@ -115,7 +139,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.MOVE_DOWN:
@@ -126,26 +150,37 @@ export const WidgetReducer = (state = {
             });
             state.orderArray.sort();
             index = state.orderArray.indexOf(action.widget.orderNum);
+
+            var x6 = document.getElementById("reposition");
+            x6.className = "show";
+            setTimeout(function(){ x6.className = x6.className.replace("show", ""); }, 3000);
+
+            if (index === state.orderArray.length - 1) {
+                var x5 = document.getElementById("bottom");
+                x5.className = "show";
+                setTimeout(function(){ x5.className = x5.className.replace("show", ""); }, 4000);
+            }
             return {
                 widgets: state.widgets.map(widget => {
-                    if(index != state.orderArray.length -1)
-                    {
+                    if (index != state.orderArray.length - 1) {
                         if (widget.orderNum === state.orderArray[index]) {
-                            widget.orderNum = state.orderArray[index+1];
+                            widget.orderNum = state.orderArray[index + 1];
                         }
                         else if (widget.orderNum === state.orderArray[index + 1]) {
                             widget.orderNum = state.orderArray[index];
                         }
                     }
-                    else{
-                        state.downButton = false;
+                    else {
+                        //state.downButton = false;
+                        //widget.arrowDown = false;
+                        //alert("Already at Bottom");
                     }
 
                     console.log(widget);
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray,
-                downButton : state.downButton
+                orderArray: state.orderArray,
+                downButton: state.downButton
             };
 
         case constants.MOVE_UP:
@@ -155,27 +190,50 @@ export const WidgetReducer = (state = {
                 state.orderArray.push(widget.orderNum);
             });
             state.orderArray.sort();
+
+            var x7 = document.getElementById("reposition");
+            x7.className = "show";
+            setTimeout(function(){ x7.className = x7.className.replace("show", ""); }, 3000);
+
             arrayIndex = state.orderArray.indexOf(action.widget.orderNum);
+            if (arrayIndex === 0) {
+                //alert("Already at Top");
+                var x4 = document.getElementById("top");
+                x4.className = "show";
+                setTimeout(function(){ x4.className = x4.className.replace("show", ""); }, 4000);
+            }
             return {
                 widgets: state.widgets.map(widget => {
-                    if(arrayIndex != 0)
-                    {
+                    if (arrayIndex != 0) {
                         if (widget.orderNum === state.orderArray[arrayIndex]) {
-                            widget.orderNum = state.orderArray[arrayIndex-1];
+                            widget.orderNum = state.orderArray[arrayIndex - 1];
                         }
-                        else if (widget.orderNum === state.orderArray[arrayIndex-1]) {
+                        else if (widget.orderNum === state.orderArray[arrayIndex - 1]) {
                             widget.orderNum = state.orderArray[arrayIndex];
                         }
                     }
-                    else{
-                        state.downButton = false;
+                    else {
+                        //state.downButton = false;
+                        //widget.arrowUp = false;
+                        //alert("Already at Top");
                     }
 
                     console.log(widget);
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray,
-                downButton : state.downButton
+                orderArray: state.orderArray,
+                downButton: state.downButton
+            };
+
+        case constants.EDIT_WIDGET:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.widget.id) {
+                        widget.innerPreview = 'false';
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray: state.orderArray
             };
 
         case constants.PREVIEW:
@@ -193,7 +251,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.WIDGET_PARA_NAME_CHANGED:
@@ -204,7 +262,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.LIST_ORDER_CHANGED:
@@ -215,7 +273,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.LIST_NAME_CHANGED:
@@ -226,11 +284,11 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.LIST_TEXT_CHANGED:
-            paragraphArray =[];
+            paragraphArray = [];
             return {
                 widgets: state.widgets.map(widget => {
                     if (widget.id === action.id) {
@@ -241,7 +299,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.SEARCH_NAME_CHANGED:
@@ -252,7 +310,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.SEARCH_NAME_RENDER:
@@ -263,7 +321,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.ASSIGN_URL:
@@ -275,27 +333,27 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
         case constants.WIDGET_NAME_IMAGE_CHANGED:
-            return{
+            return {
                 widgets: state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.widgetNameImage = action.widgetNameImage;
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
         case constants.WIDGET_IMAGE_SRC_CHANGED:
-            return{
+            return {
                 widgets: state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.src = action.src;
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.LINK_TEXT_CHANGED:
@@ -306,7 +364,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.LINK_URL_CHANGED:
@@ -317,7 +375,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
 
         case constants.WIDGET_NAME_LINK_CHANGED:
@@ -328,7 +386,7 @@ export const WidgetReducer = (state = {
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,
-                orderArray : state.orderArray
+                orderArray: state.orderArray
             };
         default:
             return state;

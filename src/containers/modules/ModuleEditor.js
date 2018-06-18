@@ -88,7 +88,7 @@ export default class ModuleEditor extends React.Component {
                     topicInput: {
                         title: ''
                     }
-                })
+                });
                 document.getElementById("widget-parent-container").style.display = "none";
             });
     }
@@ -132,8 +132,8 @@ export default class ModuleEditor extends React.Component {
     preGetWidegts(lessonId, val, name) {
         if (val == true) {
             document.getElementById("widget-parent-container").style.display = "block";
-            this.getWidgets(lessonId);
             this.setState({lessonName: name});
+            this.getWidgets(lessonId);
         }
         else {
             document.getElementById("widget-parent-container").style.display = "none";
@@ -193,7 +193,7 @@ export default class ModuleEditor extends React.Component {
     renderWidgets() {
         if (this.state.lessonId != 0 && this.state.lessonId != "" && this.state.lessonId != undefined) {
             document.getElementById("widget-parent-container").style.display = "block";
-            return <WidgetList lessonId={this.state.lessonId}/>
+            return <WidgetList lessonId={this.state.lessonId} lessonName={this.state.lessonName}/>
         }
     }
 

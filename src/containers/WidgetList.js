@@ -29,10 +29,11 @@ class WidgetList extends React.Component {
 
         return (
             <div>
-                <div className="or-spacer">
+                <div className="line-spacer">
                     <div className="mask"></div>
                 </div>
-                <span id="widget-title">Widgets</span>
+                <span id="widget-title">Widgets of <span className="text-uppercase font-weight-bold">
+                    {this.props.lessonName}</span></span>
                 {/*<h1>Widget List {this.props.widgets.length}</h1>*/}
                 <div className="widget-save-preview-container">
                     <Tooltip id="tooltip-save" title="Save">
@@ -76,9 +77,12 @@ class WidgetList extends React.Component {
                         <AddIcon/>
                     </Button>
                 </Tooltip>
-                {/*<button onClick={this.props.addWidget}>
-                    Add Widget
-                </button>*/}
+                <div id="success">Data Saved</div>
+                <div id="error">Error in saving. Please keep distinct widget names.</div>
+                <div id="view">Data loaded successfully.</div>
+                <div id="top">The widget you clicked is already at the top position.</div>
+                <div id="bottom">The widget you clicked is already at the bottom position.</div>
+                <div id="reposition">Widgets repositioned.</div>
             </div>
         )
     }
@@ -90,7 +94,7 @@ const stateToProps = (state) => {
         previewMode: state.preview,
         orderNo: state.orderNumber,
         orderArray: state.orderArray,
-        downButton: state.downButton
+        downButton: state.downButton,
     };
 };
 

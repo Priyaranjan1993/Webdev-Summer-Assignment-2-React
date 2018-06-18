@@ -27,18 +27,18 @@ li.over {
     margin-top: 40px !important;
 }
 
-.or-spacer {
+.line-spacer {
     margin-top: 100px;
     width: 100%;
     position: relative;
 }
 
-.or-spacer .mask {
+.line-spacer .mask {
     overflow: hidden;
     height: 20px;
 }
 
-.or-spacer .mask:after {
+.line-spacer .mask:after {
     content: '';
     display: block;
     margin: -25px auto 0;
@@ -48,7 +48,7 @@ li.over {
     box-shadow: 0 0 8px black;
 }
 
-.or-spacer span {
+.line-spacer span {
     width: 50px;
     height: 50px;
     position: absolute;
@@ -61,7 +61,7 @@ li.over {
     background: white;
 }
 
-.or-spacer span i {
+.line-spacer span i {
     position: absolute;
     top: 4px;
     bottom: 4px;
@@ -180,4 +180,46 @@ textarea
 {
     width: 38%;
     padding: 20px!important;
+}
+
+#success,#error,#view,#top,#bottom,#reposition {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+#success.show,#error.show,#view.show,#top.show,#bottom.show,#reposition.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }

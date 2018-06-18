@@ -9,6 +9,7 @@ export const WIDGET_NAME_CHANGED = 'WIDGET_NAME_CHANGED';
 export const PREVIEW = 'PREVIEW';
 export const MOVE_UP = 'MOVE_UP';
 export const MOVE_DOWN = 'MOVE_DOWN';
+export const EDIT_WIDGET = 'EDIT_WIDGET';
 
 export const PARA_TEXT_CHANGED = 'PARA_TEXT_CHANGED';
 export const WIDGET_PARA_NAME_CHANGED = 'WIDGET_PARA_NAME_CHANGED';

@@ -94,8 +94,8 @@
 
 
 .lesson-delete-icon {
-    right: 0;
-    padding: 4px 15px 0 14px;
+   /* right: 0;*/
+    padding: 4px 15px 0 30px;
     cursor: pointer;
     color: red;
     font-size: 20px;

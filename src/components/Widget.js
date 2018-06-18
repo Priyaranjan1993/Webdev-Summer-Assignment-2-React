@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import $ from 'jquery'
 import '../css/WidgetList.style.client.css'
 import * as constants from "../constants";
+import EditIcon from '@material-ui/icons/Edit';
 import UpIcon from '@material-ui/icons/ArrowUpward';
 import DownIcon from '@material-ui/icons/ArrowDownward';
 import Button from '@material-ui/core/Button';
@@ -22,30 +23,32 @@ const Heading = ({widget, preview, headingTextChanged, headingSizeChanged, widge
         <div>
             <h2 className="widget-heading"> Heading Widget</h2>
             <div hidden={preview}>
-                <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
-                       value={widget.text}
-                       ref={node => inputElem = node}/>
-                <FormHelperText className="helpText" id="heading-helper-text">Heading Text</FormHelperText>
-                <br/>
-                <select id="input-dropdown" onChange={() => headingSizeChanged(widget.id, selectElem.value)}
-                        value={widget.size}
-                        ref={node => selectElem = node}>
-                    <option value="1">Heading 1</option>
-                    <option value="2">Heading 2</option>
-                    <option value="3">Heading 3</option>
-                </select>
-                <FormHelperText className="helpText" id="heading-helper-select">Heading Size</FormHelperText>
-                <br/>
-                <input value={widget.widgetName}
-                       onChange={() => widgetNameChanged(widget.id, inputWidgetName.value)}
-                       ref={node => inputWidgetName = node}/>
-                <FormHelperText className="helpText" id="heading-helper-name">Widget Name</FormHelperText>
+                <div hidden={widget.innerPreview === 'true'}>
+                    <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
+                           value={widget.text}
+                           ref={node => inputElem = node}/>
+                    <FormHelperText className="helpText" id="heading-helper-text">Heading Text</FormHelperText>
+                    <br/>
+                    <select id="input-dropdown" onChange={() => headingSizeChanged(widget.id, selectElem.value)}
+                            value={widget.size}
+                            ref={node => selectElem = node}>
+                        <option value="1">Heading 1</option>
+                        <option value="2">Heading 2</option>
+                        <option value="3">Heading 3</option>
+                    </select>
+                    <FormHelperText className="helpText" id="heading-helper-select">Heading Size</FormHelperText>
+                    <br/>
+                    <input value={widget.widgetName}
+                           onChange={() => widgetNameChanged(widget.id, inputWidgetName.value)}
+                           ref={node => inputWidgetName = node}/>
+                    <FormHelperText className="helpText" id="heading-helper-name">Widget Name</FormHelperText>
 
-                <div className="or-spacer top-change">
-                    <div className="mask"></div>
+                    <div className="line-spacer top-change">
+                        <div className="mask"></div>
+                    </div>
+
+                    <h3 className="underline">Preview</h3>
                 </div>
-
-                <h3 className="underline">Preview</h3>
             </div>
             {widget.size == 1 && <h1>{widget.text}</h1>}
             {widget.size == 2 && <h2>{widget.text}</h2>}
@@ -77,23 +80,25 @@ const Paragraph = ({widget, preview, paraTextChanged, widgetParaNameChanged}) =>
         <div>
             <h2 className="widget-heading">Paragraph Widget</h2>
             <div hidden={preview}>
+                <div hidden={widget.innerPreview === 'true'}>
                 <textarea value={widget.paragraphText}
                           onChange={() => paraTextChanged(widget.id, paraWidgetVal.value)}
                           ref={node => paraWidgetVal = node}
                           placeholder="Paragraph Text"/>
-                <FormHelperText className="helpText" id="paragraph-helper-text">Insert text in the paragraph field
-                </FormHelperText>
-                <br/>
-                <input value={widget.widgetNamePara}
-                       onChange={() => widgetParaNameChanged(widget.id, paraWidgetName.value)}
-                       ref={node => paraWidgetName = node}/>
-                <FormHelperText className="helpText" id="paragraph-helper-name">Widget Name</FormHelperText>
-                <br/>
+                    <FormHelperText className="helpText" id="paragraph-helper-text">Insert text in the paragraph field
+                    </FormHelperText>
+                    <br/>
+                    <input value={widget.widgetNamePara}
+                           onChange={() => widgetParaNameChanged(widget.id, paraWidgetName.value)}
+                           ref={node => paraWidgetName = node}/>
+                    <FormHelperText className="helpText" id="paragraph-helper-name">Widget Name</FormHelperText>
+                    <br/>
 
-                <div className="or-spacer top-change">
-                    <div className="mask"></div>
+                    <div className="line-spacer top-change">
+                        <div className="mask"></div>
+                    </div>
+                    <h3 className="underline">Preview</h3>
                 </div>
-                <h3 className="underline">Preview</h3>
             </div>
             {widget.paragraphText}
         </div>
@@ -122,34 +127,37 @@ const List = ({widget, preview, listElemChanged, widgetListNameChanged, listText
         <div>
             <h2 className="widget-heading"> List Widget</h2>
             <div hidden={preview}>
+                <div hidden={widget.innerPreview === 'true'}>
                 <textarea value={widget.listText}
                           onChange={() => listTextChanged(widget.id, listText.value)}
-                          ref={node => listText = node}/>
-                <FormHelperText className="helpText" id="list-helper-textarea">Put each item in a separate row
-                </FormHelperText>
-                <br/>
-                <select id="input-dropdown" onChange={() => listElemChanged(widget.id, listSelectElem.value)}
-                        value={widget.listSelect}
-                        ref={node => listSelectElem = node}>
-                    <option value="1">Unordered List</option>
-                    <option value="2">Ordered List</option>
-                </select>
-                <FormHelperText className="helpText" id="list-helper-select">Choose list ordering type
-                </FormHelperText>
-                <br/>
-                <input value={widget.widgetNameList}
-                       onChange={() => widgetListNameChanged(widget.id, listWidgetName.value)}
-                       ref={node => listWidgetName = node}/>
-                <FormHelperText className="helpText" id="list-helper-name">Widget Name
-                </FormHelperText>
-                <br/>
+                          ref={node => listText = node}
+                          placeholder="Insert your lists"/>
+                    <FormHelperText className="helpText" id="list-helper-textarea">Put each item in a separate row
+                    </FormHelperText>
+                    <br/>
+                    <select id="input-dropdown" onChange={() => listElemChanged(widget.id, listSelectElem.value)}
+                            value={widget.listSelect}
+                            ref={node => listSelectElem = node}>
+                        <option value="1">Unordered List</option>
+                        <option value="2">Ordered List</option>
+                    </select>
+                    <FormHelperText className="helpText" id="list-helper-select">Choose list ordering type
+                    </FormHelperText>
+                    <br/>
+                    <input value={widget.widgetNameList}
+                           onChange={() => widgetListNameChanged(widget.id, listWidgetName.value)}
+                           ref={node => listWidgetName = node}/>
+                    <FormHelperText className="helpText" id="list-helper-name">Widget Name
+                    </FormHelperText>
+                    <br/>
 
 
-                <div className="or-spacer top-change">
-                    <div className="mask"></div>
+                    <div className="line-spacer top-change">
+                        <div className="mask"></div>
+                    </div>
+
+                    <h3 className="underline">Preview</h3>
                 </div>
-
-                <h3 className="underline">Preview</h3>
             </div>
             {widget.listSelect == 1 && <ul>
                 {widget.listTextToArray.map((x) => (
@@ -190,28 +198,30 @@ const Link = ({widget, preview, linkTextChanged, linkURLChanged, widgetLinkNameC
         <div>
             <h2 className="widget-heading">Link Widget</h2>
             <div hidden={preview}>
-                <input value={widget.linkText}
-                       onChange={() => linkTextChanged(widget.id, linkTextName.value)}
-                       ref={node => linkTextName = node} placeholder="Link Text"/>
-                <FormHelperText className="helpText" id="link-helper-text">Type the name of the link
-                </FormHelperText>
-                <br/>
-                <input value={widget.linkUrl}
-                       onChange={() => linkURLChanged(widget.id, linkURL.value)}
-                       ref={node => linkURL = node} placeholder="Link URL"/>
-                <FormHelperText className="helpText" id="link-helper-url">Type the link url
-                </FormHelperText>
-                <br/>
-                <input value={widget.linkName}
-                       onChange={() => widgetLinkNameChanged(widget.id, linkWidgetName.value)}
-                       ref={node => linkWidgetName = node} placeholder="Link Widget Name"/>
-                <FormHelperText className="helpText" id="link-helper-name">Widget Name
-                </FormHelperText>
-                <br/>
-                <div className="or-spacer top-change">
-                    <div className="mask"></div>
+                <div hidden={widget.innerPreview === 'true'}>
+                    <input value={widget.linkText}
+                           onChange={() => linkTextChanged(widget.id, linkTextName.value)}
+                           ref={node => linkTextName = node} placeholder="Link Text"/>
+                    <FormHelperText className="helpText" id="link-helper-text">Type the name of the link
+                    </FormHelperText>
+                    <br/>
+                    <input value={widget.linkUrl}
+                           onChange={() => linkURLChanged(widget.id, linkURL.value)}
+                           ref={node => linkURL = node} placeholder="Link URL"/>
+                    <FormHelperText className="helpText" id="link-helper-url">Type the link url
+                    </FormHelperText>
+                    <br/>
+                    <input value={widget.linkName}
+                           onChange={() => widgetLinkNameChanged(widget.id, linkWidgetName.value)}
+                           ref={node => linkWidgetName = node} placeholder="Link Widget Name"/>
+                    <FormHelperText className="helpText" id="link-helper-name">Widget Name
+                    </FormHelperText>
+                    <br/>
+                    <div className="line-spacer top-change">
+                        <div className="mask"></div>
+                    </div>
+                    <h3 className="underline">Preview</h3>
                 </div>
-                <h3 className="underline">Preview</h3>
             </div>
 
             <a href={widget.linkUrl} target="_blank">{widget.linkText}</a>
@@ -243,43 +253,48 @@ const Image = ({widget, preview, assignUrl, searchNameChanged, searchNameRender,
         <div>
             <h2 className="widget-heading">Image Widget</h2>
             <div hidden={preview}>
-                <input value={widget.searchName}
-                       onChange={() => searchNameChanged(widget.id, name.value)}
-                       ref={node => name = node}/>
-                <button type="button" className="btn btn-success btn-md"
-                        onClick={() => searchNameRender(widget.id, name.value)}> Search
-                </button>
-                <FormHelperText className="helpText" id="image-helper-search">Type the name of the image you want to
-                    search
-                </FormHelperText>
-                <br/>
+                <div hidden={widget.innerPreview === 'true'}>
+                    <input value={widget.searchName}
+                           onChange={() => searchNameChanged(widget.id, name.value)}
+                           ref={node => name = node}
+                           placeholder="Search your image"/>
+                    <button type="button" className="btn btn-success btn-md"
+                            onClick={() => searchNameRender(widget.id, name.value)}> Search
+                    </button>
+                    <FormHelperText className="helpText" id="image-helper-search">Type the name of the image you want to
+                        search
+                    </FormHelperText>
+                    <br/>
 
-                <Tooltip id="tooltip-img-src" title={widget.src}>
-                    <input value={widget.src}
-                           onChange={() => widgetImageSrcChanged(widget.id, imageUrl.value)}
-                           ref={node => imageUrl = node}/>
-                </Tooltip>
-                <FormHelperText className="helpText" id="image-helper-url">URL of the selected image
-                </FormHelperText>
-                <br/>
-                <input value={widget.widgetNameImage}
-                       onChange={() => widgetNameImageChanged(widget.id, imageWidgetName.value)}
-                       ref={node => imageWidgetName = node}/>
-                <FormHelperText className="helpText" id="image-helper-name">Widget Name
-                </FormHelperText>
-                <br/>
-                <div className="or-spacer top-change">
-                    <div className="mask"></div>
+                    <Tooltip id="tooltip-img-src" title={widget.src}>
+                        <input value={widget.src}
+                               onChange={() => widgetImageSrcChanged(widget.id, imageUrl.value)}
+                               ref={node => imageUrl = node}
+                               placeholder="Source of the image"/>
+                    </Tooltip>
+                    <FormHelperText className="helpText" id="image-helper-url">URL of the selected image
+                    </FormHelperText>
+                    <br/>
+                    <input value={widget.widgetNameImage}
+                           onChange={() => widgetNameImageChanged(widget.id, imageWidgetName.value)}
+                           ref={node => imageWidgetName = node}
+                           placeholder="Image Widget Name"/>
+                    <FormHelperText className="helpText" id="image-helper-name">Widget Name
+                    </FormHelperText>
+                    <br/>
+                    <div className="line-spacer top-change">
+                        <div className="mask"></div>
+                    </div>
+                    {widget.imageArray.items != undefined && <div>
+                        {widget.imageArray.items.map((x) => (
+                            <img src={x.image.thumbnailLink} alt={widget.searchName}
+                                 onClick={() => assignUrl(widget.id, x.image.thumbnailLink)}/>
+                        ))}
+                    </div>}
+                    <h3 className="underline">Preview</h3>
                 </div>
-                {widget.imageArray.items != undefined && <div>
-                    {widget.imageArray.items.map((x) => (
-                        <img src={x.image.thumbnailLink} alt={widget.searchName}
-                             onClick={() => assignUrl(widget.id, x.image.thumbnailLink)}/>
-                    ))}
-                </div>}
-                <h3 className="underline">Preview</h3>
             </div>
-           <img src={widget.src} alt={widget.searchName}/>
+            <img src={widget.src} alt={widget.searchName}/>
         </div>
     )
 };
@@ -310,19 +325,6 @@ const Widget = ({widget, preview, orderNoum, allWidgets, dispatch, downButton}) 
 
     return (
         <li key={widget.id} or={orderNoum} className="widget-li-container">
-            {/*            <button onClick={e => dispatch({
-                type: 'MOVE_UP',
-                widget: widget,
-                allWidgets: allWidgets
-            })}>UP
-            </button>
-            <button onClick={e => dispatch({
-                type: 'MOVE_DOWN',
-                widget: widget,
-                allWidgets: allWidgets
-            })}>Down
-            </button>*/}
-
             <div hidden={preview} className="widget-choice-parent">
                 <Tooltip id="tooltip-select" title="Select Widget">
                     <select value={widget.widgetType}
@@ -345,18 +347,19 @@ const Widget = ({widget, preview, orderNoum, allWidgets, dispatch, downButton}) 
                         <DeleteIcon/>
                     </IconButton>
                 </Tooltip>
-                {/*               <Button onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id}))}
-                        className="widget-delete-btn"
-                        variant="fab"
-                        mini
-                        color="secondary"
-                        aria-label="delete widget">
-                    <DeleteIcon/>
-                </Button>*/}
-                {/* <button onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id}))}>
-                    Delete Widget
-                </button>*/}
             </div>
+
+            <Tooltip id="tooltip-up" title="Edit">
+                <Button hidden={widget.innerPreview === 'false'}
+                        onClick={e => dispatch({
+                            type: 'EDIT_WIDGET',
+                            widget: widget,
+                            allWidgets: allWidgets
+                        })} className="widget-add-btn" variant="fab" mini
+                        color="secondary" aria-label="up">
+                    <EditIcon/>
+                </Button>
+            </Tooltip>
 
             <Tooltip id="tooltip-up" title="Move Up">
                 <Button onClick={e => dispatch({
@@ -392,9 +395,6 @@ const Widget = ({widget, preview, orderNoum, allWidgets, dispatch, downButton}) 
 
 };
 
-/*const dispatchToPropsMapper2 = dispatch => ({
-    moveUp: (widget,allWidgets) => actions.moveUp(dispatch,widget,allWidgets)
-});*/
 
 const WidgetContainer = connect(state => ({
     preview: state.preview,
