@@ -43,18 +43,18 @@ export const WidgetReducer = (state = {
                         size: '1',
                         widgetName:'Widget Name',
                         paragraphText:'',
-                        widgetNamePara:'',
+                        widgetNamePara:'Widget Name',
                         listSelect:'1',
-                        widgetNameList:'',
+                        widgetNameList:'Widget Name',
                         listText:'',
                         listTextToArray:[],
                         searchName:'',
                         src:'',
                         imageArray:[],
-                        widgetNameImage:'',
+                        widgetNameImage:'Widget Name',
                         linkText:'',
                         linkUrl:'',
-                        linkName:'',
+                        linkName:'Widget Name',
                         orderNum: state.orderNumber
                     }
                 ], orderNumber: state.orderNumber,
@@ -270,6 +270,27 @@ export const WidgetReducer = (state = {
                 widgets: state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.src = action.selectedImageUrl;
+                        widget.imageArray = [];
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray : state.orderArray
+            };
+        case constants.WIDGET_NAME_IMAGE_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.widgetNameImage = action.widgetNameImage;
+                    }
+                    return Object.assign({}, widget)
+                }), orderNumber: state.orderNumber,
+                orderArray : state.orderArray
+            };
+        case constants.WIDGET_IMAGE_SRC_CHANGED:
+            return{
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.src = action.src;
                     }
                     return Object.assign({}, widget)
                 }), orderNumber: state.orderNumber,

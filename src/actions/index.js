@@ -139,7 +139,7 @@ export const widgetNameImageChanged = (dispatch, widgetId, imageWidgetName) => (
     dispatch({
         type: constants.WIDGET_NAME_IMAGE_CHANGED,
         id: widgetId,
-        widgetNameImage: imageWidgetName
+            widgetNameImage: imageWidgetName
     })
 );
 

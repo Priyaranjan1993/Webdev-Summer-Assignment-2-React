@@ -75,7 +75,7 @@ const Paragraph = ({widget, preview, paraTextChanged, widgetParaNameChanged}) =>
     let paraWidgetVal;
     return (
         <div>
-            <h2 className="widget-heading">Paragraph</h2>
+            <h2 className="widget-heading">Paragraph Widget</h2>
             <div hidden={preview}>
                 <textarea value={widget.paragraphText}
                           onChange={() => paraTextChanged(widget.id, paraWidgetVal.value)}
@@ -188,7 +188,7 @@ const Link = ({widget, preview, linkTextChanged, linkURLChanged, widgetLinkNameC
     let linkWidgetName;
     return (
         <div>
-            <h2 className="widget-heading">Link</h2>
+            <h2 className="widget-heading">Link Widget</h2>
             <div hidden={preview}>
                 <input value={widget.linkText}
                        onChange={() => linkTextChanged(widget.id, linkTextName.value)}
@@ -239,30 +239,47 @@ const Image = ({widget, preview, assignUrl, searchNameChanged, searchNameRender,
     let name;
     let imageUrl;
     let imageWidgetName;
-    <h2>Image</h2>
     return (
         <div>
-            <div>
-                <h2>Image</h2>
+            <h2 className="widget-heading">Image Widget</h2>
+            <div hidden={preview}>
                 <input value={widget.searchName}
                        onChange={() => searchNameChanged(widget.id, name.value)}
                        ref={node => name = node}/>
-                <button onClick={() => searchNameRender(widget.id, name.value)}>Search</button>
-                <input value={widget.src}
-                       onChange={() => widgetImageSrcChanged(widget.id, imageUrl.value)}
-                       ref={node => imageUrl = node}/>
+                <button type="button" className="btn btn-success btn-md"
+                        onClick={() => searchNameRender(widget.id, name.value)}> Search
+                </button>
+                <FormHelperText className="helpText" id="image-helper-search">Type the name of the image you want to
+                    search
+                </FormHelperText>
+                <br/>
+
+                <Tooltip id="tooltip-img-src" title={widget.src}>
+                    <input value={widget.src}
+                           onChange={() => widgetImageSrcChanged(widget.id, imageUrl.value)}
+                           ref={node => imageUrl = node}/>
+                </Tooltip>
+                <FormHelperText className="helpText" id="image-helper-url">URL of the selected image
+                </FormHelperText>
+                <br/>
                 <input value={widget.widgetNameImage}
                        onChange={() => widgetNameImageChanged(widget.id, imageWidgetName.value)}
                        ref={node => imageWidgetName = node}/>
+                <FormHelperText className="helpText" id="image-helper-name">Widget Name
+                </FormHelperText>
+                <br/>
+                <div className="or-spacer top-change">
+                    <div className="mask"></div>
+                </div>
+                {widget.imageArray.items != undefined && <div>
+                    {widget.imageArray.items.map((x) => (
+                        <img src={x.image.thumbnailLink} alt={widget.searchName}
+                             onClick={() => assignUrl(widget.id, x.image.thumbnailLink)}/>
+                    ))}
+                </div>}
+                <h3 className="underline">Preview</h3>
             </div>
-            <h3>Preview</h3>
-            {/*<image src={widget.src} alt={widget.searchName}/>*/}
-            {widget.imageArray.items != undefined && <div>
-                {widget.imageArray.items.map((x) => (
-                    <img src={x.image.thumbnailLink} alt={widget.searchName}
-                         onClick={() => assignUrl(widget.id, x.image.thumbnailLink)}/>
-                ))}
-            </div>}
+           <img src={widget.src} alt={widget.searchName}/>
         </div>
     )
 };
