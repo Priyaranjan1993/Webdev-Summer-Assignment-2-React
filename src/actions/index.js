@@ -9,7 +9,7 @@ function viewSuccess(str) {
 
 
 export const findAllWidgets = (dispatch,lessonId) => {
-    fetch('http://localhost:8080/api/lesson/lessonId/widget'.replace('lessonId',lessonId))
+    fetch('https://shrouded-lowlands-37542.herokuapp.com/api/lesson/lessonId/widget'.replace('lessonId',lessonId))
         .then(response =>
             (response.json())
         )
