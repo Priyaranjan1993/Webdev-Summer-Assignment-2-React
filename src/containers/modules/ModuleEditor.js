@@ -18,7 +18,9 @@ export default class ModuleEditor extends React.Component {
         this.createLesson = this.createLesson.bind(this);
         this.deleteLesson = this.deleteLesson.bind(this);
         this.getTopics = this.getTopics.bind(this);
+        this.getWidgets = this.getWidgets.bind(this);
         /*this.preGetTopics = this.preGetTopics.bind(this);*/
+        this.preGetWidegts = this.preGetWidegts.bind(this);
         this.addLessonTitle = this.addLessonTitle.bind(this);
         this.addTopicTitle = this.addTopicTitle.bind(this);
         this.callCreateLessons = this.callCreateLessons.bind(this);
@@ -42,6 +44,8 @@ export default class ModuleEditor extends React.Component {
         this.setModuleId(newProps.moduleId);
         this.findLessonForModule(newProps.courseId, newProps.moduleId);
         this.setState({topics: []});
+        this.setState({lessonId: ''});
+        document.getElementById("widget-parent-container").style.display = "none";
     }
 
     createLesson(cid, mid, lesson) {
@@ -85,7 +89,7 @@ export default class ModuleEditor extends React.Component {
                         title: ''
                     }
                 })
-                document.getElementById("topic-input-id").style.display = "none";
+                document.getElementById("widget-parent-container").style.display = "none";
             });
     }
 
@@ -125,13 +129,30 @@ export default class ModuleEditor extends React.Component {
             })
     }
 
+    preGetWidegts(lessonId, val, name) {
+        if (val == true) {
+            document.getElementById("widget-parent-container").style.display = "block";
+            this.getWidgets(lessonId);
+            this.setState({lessonName: name});
+        }
+        else {
+            document.getElementById("widget-parent-container").style.display = "none";
+        }
+    }
+
+    getWidgets(lessonId) {
+        this.setState({lessonId: lessonId});
+        // return <WidgetList lessonId={lessonId}/>
+    }
+
     renderLessonList() {
         let lessons = null;
         if (this.state.lesson.length != 0) {
             return <LessonList lessons={this.state.lesson} delete={this.deleteCourse}
                                courseId={this.props.courseId} moduleId={this.props.moduleId}
                                addHandler={this.createLesson} deleteHandler={this.deleteLesson}
-                               getTopicsHandler={this.preGetTopics}/>
+                               getTopicsHandler={this.preGetWidegts}/>
+            /*getTopicsHandler={this.preGetTopics}*/
         }
         /*            lessons = this.state.lesson.map(
                         (lessons) => {
@@ -168,6 +189,13 @@ export default class ModuleEditor extends React.Component {
               topics
           )
       }*/
+
+    renderWidgets() {
+        if (this.state.lessonId != 0 && this.state.lessonId != "" && this.state.lessonId != undefined) {
+            document.getElementById("widget-parent-container").style.display = "block";
+            return <WidgetList lessonId={this.state.lessonId}/>
+        }
+    }
 
     addLessonTitle(event) {
         this.setState({
@@ -209,7 +237,9 @@ export default class ModuleEditor extends React.Component {
                         for <span className="text-uppercase font-weight-bold">{this.props.moduleName}</span></span>
                     {this.renderLessonList()}
                 </div>
-                <WidgetList/>
+                <div id="widget-parent-container">
+                    {this.renderWidgets()}
+                </div>
                 {/*<div className="col-4 topicdiv" id="topic-input-id">
                     <div>
                         <div className="form-group custom-topic-box row">

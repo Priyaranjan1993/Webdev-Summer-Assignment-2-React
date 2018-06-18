@@ -2,8 +2,8 @@ import * as constants from '../constants/index'
 import $ from "jquery";
 
 
-export const findAllWidgets = dispatch => {
-    fetch('http://localhost:8080/api/widget')
+export const findAllWidgets = (dispatch,lessonId) => {
+    fetch('http://localhost:8080/api/lesson/lessonId/widget'.replace('lessonId',lessonId))
         .then(response =>
             (response.json())
         )
@@ -18,8 +18,11 @@ export const addWidget = dispatch => (
     dispatch({type: constants.ADD_WIDGET})
 );
 
-export const save = dispatch => (
-    dispatch({type: constants.SAVE})
+export const save = (dispatch,lessonId) => (
+    dispatch({
+        type: constants.SAVE,
+        lessonId:lessonId
+    })
 );
 
 export const preview = dispatch => (

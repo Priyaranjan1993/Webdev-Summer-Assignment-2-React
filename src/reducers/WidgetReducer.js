@@ -62,7 +62,8 @@ export const WidgetReducer = (state = {
             };
 
         case constants.SAVE:
-            fetch('http://localhost:8080/api/widget/save', {
+            let lessonId = action.lessonId;
+            fetch('http://localhost:8080/api/lesson/lessonId/widget'.replace('lessonId',lessonId),{
                 method: 'post',
                 body: JSON.stringify(state.widgets),
                 headers: {

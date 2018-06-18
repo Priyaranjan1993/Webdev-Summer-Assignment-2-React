@@ -10,14 +10,18 @@ import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
 
 
-
-
 class WidgetList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.props.findAllWidgets();
+        this.props.findAllWidgets(this.props.lessonId);
         let count = 0;
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.lessonId !== prevProps.lessonId) {
+            this.props.findAllWidgets(this.props.lessonId);
+        }
     }
 
 
@@ -30,23 +34,24 @@ class WidgetList extends React.Component {
                 </div>
                 <span id="widget-title">Widgets</span>
                 {/*<h1>Widget List {this.props.widgets.length}</h1>*/}
-                <div className="widget-save-preview-container" hidden={this.props.widgets.length === 0}>
+                <div className="widget-save-preview-container">
                     <Tooltip id="tooltip-save" title="Save">
-                    <button type="button" className="btn btn-success btn-md widget-save-btn"
-                            hidden={this.props.previewMode} onClick={this.props.save}> Save
-                    </button>
+                        <button type="button" className="btn btn-success btn-md widget-save-btn"
+                                hidden={this.props.previewMode} onClick={() => this.props.save(this.props.lessonId)}> Save
+                        </button>
                     </Tooltip>
                     <Tooltip id="tooltip-preview" title="Preview">
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={this.props.previewMode}
-                                onChange={this.props.preview}
-                                color="primary"
-                            />
-                        }
-                        label="Preview"
-                    />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={this.props.previewMode}
+                                    onChange={this.props.preview}
+                                    color="primary"
+                                />
+                            }
+                            label="Preview"
+                            hidden={this.props.widgets.length === 0}
+                        />
                     </Tooltip>
                 </div>
                 <ul className="widget-parent-container">
@@ -65,11 +70,11 @@ class WidgetList extends React.Component {
                     }
                 </ul>
                 <Tooltip id="tooltip-add" title="Add Widget">
-                <Button className="widget-add-btn" variant="fab" mini
-                        color="primary" aria-label="add"
-                        onClick={this.props.addWidget}>
-                    <AddIcon />
-                </Button>
+                    <Button className="widget-add-btn" variant="fab" mini
+                            color="primary" aria-label="add"
+                            onClick={this.props.addWidget}>
+                        <AddIcon/>
+                    </Button>
                 </Tooltip>
                 {/*<button onClick={this.props.addWidget}>
                     Add Widget
@@ -90,9 +95,9 @@ const stateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    findAllWidgets: () => actions.findAllWidgets(dispatch),
+    findAllWidgets: (lessonId) => actions.findAllWidgets(dispatch, lessonId),
     addWidget: () => actions.addWidget(dispatch),
-    save: () => actions.save(dispatch),
+    save: (lessonId) => actions.save(dispatch,lessonId),
     preview: () => actions.preview(dispatch)
 });
 
