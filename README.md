@@ -1,4 +1,18 @@
+####UPDATE####ASSIGNMENT 3######
+===================================
 
+This release contains the react redux code for assignment 3.
+
+Heroku link for react redux code - https://protected-mountain-43946.herokuapp.com/courses
+
+The java code is contained in -
+https://github.com/Priyaranjan1993/Webdev-Summer-Assignment1/releases/tag/v1.3
+
+Heroku link for Java code - https://shrouded-lowlands-37542.herokuapp.com/
+
+
+
+===================================================================================================================================
 Webdev-Summer-Assignment1 repository contains the backend part built using spring boot. Webdev-Summer-Assignment-2-React repository contains the front-end part built using React.
 
 To start the application , please enter protocol/domain-name/courses
