@@ -1,6 +1,7 @@
 ####UPDATE####ASSIGNMENT 3######
 ===================================
 
+https://github.com/Priyaranjan1993/Webdev-Summer-Assignment-2-React/releases/tag/v1.2
 This release contains the react redux code for assignment 3.
 
 Heroku link for react redux code - https://protected-mountain-43946.herokuapp.com/courses
