@@ -85,6 +85,7 @@ export default class ModuleEditor extends React.Component {
                 alert("Lesson deleted");
                 this.setState({topics: []});
                 this.setState({lessonName: ''});
+                this.setState({lessonId: ''});
                 this.setState({
                     topicInput: {
                         title: ''
