@@ -153,7 +153,7 @@ export const WidgetReducer = (state = {
 
             var x6 = document.getElementById("reposition");
             x6.className = "show";
-            setTimeout(function(){ x6.className = x6.className.replace("show", ""); }, 3000);
+            setTimeout(function(){ x6.className = x6.className.replace("show", ""); }, 2000);
 
             if (index === state.orderArray.length - 1) {
                 var x5 = document.getElementById("bottom");
@@ -193,7 +193,7 @@ export const WidgetReducer = (state = {
 
             var x7 = document.getElementById("reposition");
             x7.className = "show";
-            setTimeout(function(){ x7.className = x7.className.replace("show", ""); }, 3000);
+            setTimeout(function(){ x7.className = x7.className.replace("show", ""); }, 2000);
 
             arrayIndex = state.orderArray.indexOf(action.widget.orderNum);
             if (arrayIndex === 0) {
